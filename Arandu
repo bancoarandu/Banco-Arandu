@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Banco Arandu</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef3f0;
+    color: #17201d;
+}
+
+.app {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    min-height: 100vh;
+    padding-bottom: 85px;
+}
+
+/* ENTRADA */
+
+#entrada {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+}
+
+.logo-grande {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.icone {
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    background: #126b4a;
+    color: white;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.logo-grande h1 {
+    color: #126b4a;
+    margin-bottom: 5px;
+}
+
+.logo-grande p {
+    color: #718078;
+}
+
+.entrar {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 12px;
+    background: #126b4a;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+/* APLICATIVO */
+
+#appPrincipal {
+    display: none;
+}
+
+.topo {
+    padding: 25px 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #126b4a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.usuario small {
+    color: #718078;
+}
+
+.usuario strong {
+    display: block;
+    margin-top: 3px;
+}
+
+.sair {
+    border: none;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.conteudo {
+    padding: 10px 20px;
+}
+
+/* TELAS */
+
+.tela {
+    display: none;
+}
+
+.tela.ativa {
+    display: block;
+}
+
+/* SALDO */
+
+.saldo {
+    background: linear-gradient(135deg, #126b4a, #08442f);
+    color: white;
+    border-radius: 22px;
+    padding: 25px;
+    margin: 15px 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+
+.saldo small {
+    opacity: .8;
+}
+
+.saldo h2 {
+    font-size: 32px;
+    margin: 10px 0 0;
+}
+
+/* AÇÕES */
+
+.acoes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.acao {
+    border: none;
+    background: white;
+    border-radius: 15px;
+    padding: 16px 5px;
+    cursor: pointer;
+    color: #17201d;
+}
+
+.acao span {
+    display: block;
+    color: #126b4a;
+    font-size: 23px;
+    margin-bottom: 6px;
+}
+
+/* CARDS */
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+/* EXTRATO */
+
+.movimento {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 0;
+    border-bottom: 1px solid #e5ebe7;
+}
+
+.movimento:last-child {
+    border-bottom: none;
+}
+
+.mov-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.entrada {
+    background: #dff4e8;
+    color: #16834f;
+}
+
+.saida {
+    background: #ffe3e3;
+    color: #c43d35;
+}
+
+.mov-info {
+    flex: 1;
+}
+
+.mov-info strong {
+    display: block;
+}
+
+.mov-info small {
+    color: #718078;
+}
+
+.positivo {
+    color: #16834f;
+}
+
+.negativo {
+    color: #c43d35;
+}
+
+/* CARTÃO */
+
+.cartao {
+    height: 180px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #202d29, #0b1210);
+    color: white;
+    padding: 22px;
+}
+
+.cartao-topo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.numero {
+    margin-top: 50px;
+    letter-spacing: 3px;
+    font-size: 18px;
+}
+
+/* AJUSTES */
+
+.config-item {
+    background: white;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.config-item button {
+    border: none;
+    background: #126b4a;
+    color: white;
+    padding: 9px 13px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+/* AVISO */
+
+.aviso {
+    background: #fff3bf;
+    color: #665300;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+/* MENU */
+
+.menu {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-top: 1px solid #dde4df;
+    display: flex;
+    justify-content: space-around;
+    padding: 9px 5px;
+}
+
+.menu button {
+    border: none;
+    background: transparent;
+    color: #718078;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.menu button span {
+    display: block;
+    font-size: 21px;
+    margin-bottom: 3px;
+}
+
+.menu button.ativo {
+    color: #126b4a;
+}
+
+/* CELULAR */
+
+@media(max-width: 450px) {
+
+    .saldo h2 {
+        font-size: 29px;
+    }
+
+    .acao {
+        font-size: 11px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- =========================
+     TELA DE ENTRADA
+========================= -->
+
+<section id="entrada">
+
+    <div class="logo-grande">
+
+        <div class="icone">
+            A
+        </div>
+
+        <h1>Banco Arandu</h1>
+
+        <p>
+            Uma experiência bancária demonstrativa
+        </p>
+
+    </div>
+
+    <button
+        class="entrar"
+        onclick="entrar()">
+
+        Entrar na conta demonstrativa
+
+    </button>
+
+</section>
+
+
+<!-- =========================
+     APLICATIVO
+========================= -->
+
+<section id="appPrincipal">
+
+
+<header class="topo">
+
+    <div class="usuario">
+
+        <div class="avatar">
+            LA
+        </div>
+
+        <div>
+
+            <small>
+                Olá,
+            </small>
+
+            <strong>
+                Lucas
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="sair"
+        onclick="sair()">
+
+        ↪
+
+    </button>
+
+</header>
+
+
+<main class="conteudo">
+
+
+<!-- =========================
+     INÍCIO
+========================= -->
+
+<section
+    id="inicio"
+    class="tela ativa">
+
+    <h2>
+        Visão geral
+    </h2>
+
+
+    <div class="saldo">
+
+        <small>
+            Saldo disponível
+        </small>
+
+        <h2 id="saldo">
+            R$ 2.500,00
+        </h2>
+
+    </div>
+
+
+    <div class="acoes">
+
+        <button
+            class="acao"
+            onclick="depositar()">
+
+            <span>＋</span>
+
+            Depositar
+
+        </button>
+
+
+        <button
+            class="acao"
+            onclick="transferir()">
+
+            <span>↗</span>
+
+            Transferir
+
+        </button>
+
+
+        <button
+            class="acao"
+            onclick="pagar()">
+
+            <span>▣</span>
+
+            Pagar
+
+        </button>
+
+    </div>
+
+
+    <section class="card">
+
+        <h3>
+            Últimas movimentações
+        </h3>
+
+        <div id="resumoExtrato">
+
+            <div class="movimento">
+
+                <div class="mov-icon entrada">
+                    ＋
+                </div>
+
+                <div class="mov-info">
+
+                    <strong>
+                        Depósito
+                    </strong>
+
+                    <small>
+                        Hoje
+                    </small>
+
+                </div>
+
+                <strong class="positivo">
+                    + R$ 500,00
+                </strong>
+
+            </div>
+
+
+            <div class="movimento">
+
+                <div class="mov-icon saida">
+                    −
+                </div>
+
+                <div class="mov-info">
+
+                    <strong>
+                        Compra simulada
+                    </strong>
+
+                    <small>
+                        Ontem
+                    </small>
+
+                </div>
+
+                <strong class="negativo">
+                    - R$ 75,00
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+<!-- =========================
+     EXTRATO
+========================= -->
+
+<section
+    id="extratoTela"
+    class="tela">
+
+    <h2>
+        Extrato
+    </h2>
+
+    <section class="card">
+
+        <h3>
+            Todas as movimentações
+        </h3>
+
+        <div id="extrato">
+
+            <div class="movimento">
+
+                <div class="mov-icon entrada">
+                    ＋
+                </div>
+
+                <div class="mov-info">
+
+                    <strong>
+                        Depósito
+                    </strong>
+
+                    <small>
+                        Hoje
+                    </small>
+
+                </div>
+
+                <strong class="positivo">
+                    + R$ 500,00
+                </strong>
+
+            </div>
+
+
+            <div class="movimento">
+
+                <div class="mov-icon saida">
+                    −
+                </div>
+
+                <div class="mov-info">
+
+                    <strong>
+                        Compra simulada
+                    </strong>
+
+                    <small>
+                        Ontem
+                    </small>
+
+                </div>
+
+                <strong class="negativo">
+                    - R$ 75,00
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+<!-- =========================
+     CARTÃO
+========================= -->
+
+<section
+    id="cartaoTela"
+    class="tela">
+
+    <h2>
+        Meu cartão
+    </h2>
+
+
+    <section class="card">
+
+        <div class="cartao">
+
+            <div class="cartao-topo">
+
+                <strong>
+                    BANCO ARANDU
+                </strong>
+
+                <span>
+                    💳
+                </span>
+
+            </div>
+
+
+            <div class="numero">
+                •••• •••• •••• 2026
+            </div>
+
+
+            <small>
+                CARTÃO FICTÍCIO
+            </small>
+
+        </div>
+
+        <br>
+
+        <p>
+            Cartão demonstrativo
+        </p>
+
+        <small>
+            Este cartão não possui função de pagamento real.
+        </small>
+
+    </section>
+
+</section>
+
+
+<!-- =========================
+     AJUSTES
+========================= -->
+
+<section
+    id="ajustesTela"
+    class="tela">
+
+    <h2>
+        Ajustes
+    </h2>
+
+
+    <div class="config-item">
+
+        <span>
+            🌙 Modo escuro
+        </span>
+
+        <button
+            onclick="modoEscuro()">
+
+            Alterar
+
+        </button>
+
+    </div>
+
+
+    <div class="config-item">
+
+        <span>
+            👤 Perfil demonstrativo
+        </span>
+
+        <button
+            onclick="alert('Perfil fictício do Banco Arandu')">
+
+            Ver
+
+        </button>
+
+    </div>
+
+
+    <div class="config-item">
+
+        <span>
+            ℹ️ Sobre o Arandu
+        </span>
+
+        <button
+            onclick="alert('Banco Arandu — sistema demonstrativo')">
+
+            Ver
+
+        </button>
+
+    </div>
+
+
+    <div class="aviso">
+
+        ⚠️ Este site é apenas uma demonstração.
+        Não insira senhas, CPF, cartões ou outros
+        dados bancários reais.
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     MENU INFERIOR
+========================= -->
+
+<nav class="menu">
+
+    <button
+        id="menuInicio"
+        class="ativo"
+        onclick="abrirTela('inicio', this)">
+
+        <span>⌂</span>
+
+        Início
+
+    </button>
+
+
+    <button
+        onclick="abrirTela('extratoTela', this)">
+
+        <span>▤</span>
+
+        Extrato
+
+    </button>
+
+
+    <button
+        onclick="abrirTela('cartaoTela', this)">
+
+        <span>▣</span>
+
+        Cartão
+
+    </button>
+
+
+    <button
+        onclick="abrirTela('ajustesTela', this)">
+
+        <span>⚙</span>
+
+        Ajustes
+
+    </button>
+
+</nav>
+
+
+</section>
+
+</div>
+
+
+<script>
+
+let saldo = 2500;
+
+
+/* =========================
+   ENTRAR
+========================= */
+
+function entrar() {
+
+    document.getElementById("entrada").style.display = "none";
+
+    document.getElementById("appPrincipal").style.display = "block";
+
+}
+
+
+/* =========================
+   SAIR
+========================= */
+
+function sair() {
+
+    document.getElementById("appPrincipal").style.display = "none";
+
+    document.getElementById("entrada").style.display = "flex";
+
+}
+
+
+/* =========================
+   ABRIR TELA
+========================= */
+
+function abrirTela(id, botao) {
+
+    const telas =
+        document.querySelectorAll(".tela");
+
+    telas.forEach(function(tela) {
+
+        tela.classList.remove("ativa");
+
+    });
+
+
+    document
+        .getElementById(id)
+        .classList.add("ativa");
+
+
+    const botoes =
+        document.querySelectorAll(".menu button");
+
+    botoes.forEach(function(btn) {
+
+        btn.classList.remove("ativo");
+
+    });
+
+
+    botao.classList.add("ativo");
+
+}
+
+
+/* =========================
+   SALDO
+========================= */
+
+function atualizarSaldo() {
+
+    document
+        .getElementById("saldo")
+        .textContent =
+        saldo.toLocaleString(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL"
+            }
+        );
+
+}
+
+
+/* =========================
+   ADICIONAR MOVIMENTO
+========================= */
+
+function adicionarMovimento(
+    nome,
+    valor,
+    entrada
+) {
+
+    const extrato =
+        document.getElementById("extrato");
+
+
+    const resumo =
+        document.getElementById("resumoExtrato");
+
+
+    const movimento =
+        document.createElement("div");
+
+
+    movimento.className =
+        "movimento";
+
+
+    const classe =
+        entrada
+        ? "entrada"
+        : "saida";
+
+
+    const cor =
+        entrada
+        ? "positivo"
+        : "negativo";
+
+
+    const simbolo =
+        entrada
+        ? "+"
+        : "−";
+
+
+    const sinal =
+        entrada
+        ? "+"
+        : "-";
+
+
+    movimento.innerHTML = `
+
+        <div class="mov-icon ${classe}">
+            ${simbolo}
+        </div>
+
+        <div class="mov-info">
+
+            <strong>
+                ${nome}
+            </strong>
+
+            <small>
+                Agora
+            </small>
+
+        </div>
+
+        <strong class="${cor}">
+            ${sinal} R$
+            ${valor
+                .toFixed(2)
+                .replace(".", ",")}
+        </strong>
+
+    `;
+
+
+    extrato.prepend(
+        movimento.cloneNode(true)
+    );
+
+
+    resumo.prepend(
+        movimento
+    );
+
+}
+
+
+/* =========================
+   DEPOSITAR
+========================= */
+
+function depositar() {
+
+    const valor =
+        Number(
+            prompt(
+                "Digite um valor fictício para depositar:"
+            )
+        );
+
+
+    if (
+        !valor ||
+        valor <= 0
+    ) {
+
+        alert(
+            "Digite um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    saldo += valor;
+
+
+    adicionarMovimento(
+        "Depósito simulado",
+        valor,
+        true
+    );
+
+
+    atualizarSaldo();
+
+}
+
+
+/* =========================
+   TRANSFERIR
+========================= */
+
+function transferir() {
+
+    const valor =
+        Number(
+            prompt(
+                "Digite um valor fictício para transferir:"
+            )
+        );
+
+
+    if (
+        !valor ||
+        valor <= 0
+    ) {
+
+        alert(
+            "Digite um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    if (valor > saldo) {
+
+        alert(
+            "Saldo insuficiente."
+        );
+
+        return;
+
+    }
+
+
+    saldo -= valor;
+
+
+    adicionarMovimento(
+        "Transferência simulada",
+        valor,
+        false
+    );
+
+
+    atualizarSaldo();
+
+}
+
+
+/* =========================
+   PAGAR
+========================= */
+
+function pagar() {
+
+    const valor =
+        Number(
+            prompt(
+                "Digite um valor fictício para pagar:"
+            )
+        );
+
+
+    if (
+        !valor ||
+        valor <= 0
+    ) {
+
+        alert(
+            "Digite um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    if (valor > saldo) {
+
+        alert(
+            "Saldo insuficiente."
+        );
+
+        return;
+
+    }
+
+
+    saldo -= valor;
+
+
+    adicionarMovimento(
+        "Pagamento simulado",
+        valor,
+        false
+    );
+
+
+    atualizarSaldo();
+
+}
+
+
+/* =========================
+   MODO ESCURO
+========================= */
+
+function modoEscuro() {
+
+    document.body.classList.toggle("escuro");
+
+
+    if (
+        document.body.classList.contains("escuro")
+    ) {
+
+        document.body.style.background =
+            "#101615";
+
+        document.querySelector(".app").style.background =
+            "#101615";
+
+    } else {
+
+        document.body.style.background =
+            "#eef3f0";
+
+        document.querySelector(".app").style.background =
+            "#eef3f0";
+
+    }
+
+}
+
+
+atualizarSaldo();
+
+</script>
+
+</body>
+
+</html>
