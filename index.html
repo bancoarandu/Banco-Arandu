@@ -26,6 +26,7 @@ body {
 }
 
 /* LOGIN */
+
 #entrada {
     min-height: 100vh;
     display: flex;
@@ -73,7 +74,8 @@ body {
     cursor: pointer;
 }
 
-/* TOPO */
+/* APP */
+
 #appPrincipal {
     display: none;
 }
@@ -156,6 +158,7 @@ body {
 }
 
 /* SALDO */
+
 .saldo {
     background: linear-gradient(135deg, #126b4a, #08442f);
     color: white;
@@ -175,6 +178,7 @@ body {
 }
 
 /* AÇÕES */
+
 .acoes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -200,6 +204,7 @@ body {
 }
 
 /* CARDS */
+
 .card,
 .formulario {
     background: white;
@@ -213,7 +218,8 @@ body {
     margin-top: 0;
 }
 
-/* MOVIMENTAÇÕES */
+/* EXTRATO */
+
 .movimento {
     display: flex;
     align-items: center;
@@ -268,6 +274,7 @@ body {
 }
 
 /* FORMULÁRIOS */
+
 .formulario label {
     display: block;
     margin-top: 15px;
@@ -301,6 +308,7 @@ body {
 }
 
 /* PIX */
+
 .pix-chave {
     background: #eef8f3;
     padding: 14px;
@@ -330,12 +338,17 @@ body {
         linear-gradient(45deg, transparent 75%, #111 75%),
         linear-gradient(-45deg, transparent 75%, #111 75%);
     background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    background-position:
+        0 0,
+        0 10px,
+        10px -10px,
+        -10px 0;
     border: 10px solid white;
     box-shadow: 0 0 0 1px #ddd;
 }
 
 /* NOTIFICAÇÕES */
+
 .notificacoes {
     display: none;
     position: absolute;
@@ -372,6 +385,7 @@ body {
 }
 
 /* RECEBIMENTO */
+
 .recebimento {
     display: none;
     background: #dff4e8;
@@ -388,6 +402,7 @@ body {
 }
 
 /* COMPROVANTE */
+
 .comprovante {
     display: none;
     background: #eef8f3;
@@ -401,6 +416,7 @@ body {
 }
 
 /* CARTÃO */
+
 .cartao {
     height: 180px;
     border-radius: 20px;
@@ -421,6 +437,7 @@ body {
 }
 
 /* AJUSTES */
+
 .config-item {
     background: white;
     padding: 18px;
@@ -450,6 +467,7 @@ body {
 }
 
 /* MENU */
+
 .menu {
     position: fixed;
     bottom: 0;
@@ -484,6 +502,7 @@ body {
 }
 
 @media (max-width: 450px) {
+
     .saldo h2 {
         font-size: 29px;
     }
@@ -491,6 +510,7 @@ body {
     .acao {
         font-size: 11px;
     }
+
 }
 </style>
 </head>
@@ -500,22 +520,36 @@ body {
 <div class="app">
 
 <!-- LOGIN -->
+
 <section id="entrada">
 
     <div class="logo-grande">
+
         <div class="icone">A</div>
+
         <h1>Banco Arandu</h1>
-        <p>Uma experiência bancária demonstrativa</p>
+
+        <p>
+            Uma experiência bancária demonstrativa
+        </p>
+
     </div>
 
-    <button class="entrar" onclick="entrar()">
+    <!-- BOTÃO CORRIGIDO -->
+
+    <button
+        id="botaoEntrar"
+        class="entrar"
+        type="button"
+    >
         Entrar na conta demonstrativa
     </button>
 
 </section>
 
 
-<!-- APP -->
+<!-- APLICATIVO -->
+
 <section id="appPrincipal">
 
 <header class="topo">
@@ -525,20 +559,40 @@ body {
         <div class="avatar">U</div>
 
         <div>
+
             <small>Olá,</small>
+
             <strong>Usuário</strong>
+
         </div>
 
     </div>
 
+
     <div class="topo-direita">
 
-        <button class="topo-btn" onclick="mostrarNotificacoes()">
+        <button
+            class="topo-btn"
+            type="button"
+            onclick="mostrarNotificacoes()"
+        >
             🔔
-            <span id="badge" class="badge">0</span>
+
+            <span
+                id="badge"
+                class="badge"
+            >
+                0
+            </span>
+
         </button>
 
-        <button class="topo-btn" onclick="sair()">
+
+        <button
+            class="topo-btn"
+            type="button"
+            onclick="sair()"
+        >
             ↪
         </button>
 
@@ -547,14 +601,19 @@ body {
 </header>
 
 
-<div id="notificacoes" class="notificacoes">
+<div
+    id="notificacoes"
+    class="notificacoes"
+>
 
     <h3>Notificações</h3>
 
     <div id="listaNotificacoes">
+
         <p style="color:#718078;">
             Nenhuma notificação nova.
         </p>
+
     </div>
 
 </div>
@@ -562,32 +621,66 @@ body {
 
 <main class="conteudo">
 
+
 <!-- INÍCIO -->
-<section id="inicio" class="tela ativa">
+
+<section
+    id="inicio"
+    class="tela ativa"
+>
 
     <h2>Visão geral</h2>
 
+
     <div class="saldo">
+
         <small>Saldo disponível</small>
-        <h2 id="saldo">R$ 2.500,00</h2>
+
+        <h2 id="saldo">
+            R$ 2.500,00
+        </h2>
+
     </div>
 
 
     <div class="acoes">
 
-        <button class="acao" onclick="depositar()">
+        <button
+            class="acao"
+            type="button"
+            onclick="depositar()"
+        >
+
             <span>＋</span>
+
             Depositar
+
         </button>
 
-        <button class="acao" onclick="abrirTelaPorId('pixEnviarTela')">
+
+        <button
+            class="acao"
+            type="button"
+            onclick="abrirTelaPorId('pixEnviarTela')"
+        >
+
             <span>⚡</span>
+
             Enviar Pix
+
         </button>
 
-        <button class="acao" onclick="abrirTelaPorId('pixReceberTela')">
+
+        <button
+            class="acao"
+            type="button"
+            onclick="abrirTelaPorId('pixReceberTela')"
+        >
+
             <span>⇩</span>
+
             Receber Pix
+
         </button>
 
     </div>
@@ -601,11 +694,20 @@ body {
 
             <div class="movimento">
 
-                <div class="mov-icon entrada">＋</div>
+                <div class="mov-icon entrada">
+                    ＋
+                </div>
 
                 <div class="mov-info">
-                    <strong>Depósito</strong>
-                    <small>22/09/2026 • Inicial</small>
+
+                    <strong>
+                        Saldo inicial
+                    </strong>
+
+                    <small>
+                        Conta demonstrativa
+                    </small>
+
                 </div>
 
                 <strong class="positivo">
@@ -622,16 +724,22 @@ body {
 
 
 <!-- ENVIAR PIX -->
-<section id="pixEnviarTela" class="tela">
+
+<section
+    id="pixEnviarTela"
+    class="tela"
+>
 
     <h2>Enviar Pix</h2>
+
 
     <div class="formulario">
 
         <h3>Novo Pix</h3>
 
+
         <label for="chavePixDestino">
-            Chave Pix de quem vai receber
+            Chave Pix
         </label>
 
         <input
@@ -667,6 +775,7 @@ body {
 
         <button
             class="botao-principal"
+            type="button"
             onclick="enviarPix()"
         >
             Enviar Pix
@@ -675,7 +784,10 @@ body {
     </div>
 
 
-    <div id="comprovanteEnvio" class="comprovante">
+    <div
+        id="comprovanteEnvio"
+        class="comprovante"
+    >
 
         <h3>Pix realizado</h3>
 
@@ -686,6 +798,7 @@ body {
 
     <button
         class="botao-principal"
+        type="button"
         onclick="abrirTelaPorId('inicio')"
     >
         Voltar
@@ -695,16 +808,23 @@ body {
 
 
 <!-- RECEBER PIX -->
-<section id="pixReceberTela" class="tela">
+
+<section
+    id="pixReceberTela"
+    class="tela"
+>
 
     <h2>Receber Pix</h2>
+
 
     <div
         id="mensagemRecebimento"
         class="recebimento"
     >
 
-        <strong>Pix recebido!</strong>
+        <strong>
+            Pix recebido!
+        </strong>
 
         <span id="textoRecebimento"></span>
 
@@ -715,9 +835,12 @@ body {
 
         <h3>Minha chave Pix</h3>
 
+
         <div class="pix-chave">
 
-            <small>Chave Pix fictícia</small>
+            <small>
+                Chave Pix fictícia
+            </small>
 
             <strong id="minhaChave">
                 usuario@arandu.demo
@@ -725,8 +848,10 @@ body {
 
         </div>
 
+
         <button
             class="botao-principal"
+            type="button"
             onclick="copiarChave()"
         >
             Copiar chave
@@ -738,6 +863,7 @@ body {
     <div class="formulario">
 
         <h3>Simular recebimento</h3>
+
 
         <label for="nomeRemetente">
             Quem te mandou o Pix?
@@ -765,6 +891,7 @@ body {
 
         <button
             class="botao-principal"
+            type="button"
             onclick="receberPix()"
         >
             Confirmar recebimento
@@ -788,6 +915,7 @@ body {
 
     <button
         class="botao-principal"
+        type="button"
         onclick="abrirTelaPorId('inicio')"
     >
         Voltar
@@ -797,9 +925,14 @@ body {
 
 
 <!-- EXTRATO -->
-<section id="extratoTela" class="tela">
+
+<section
+    id="extratoTela"
+    class="tela"
+>
 
     <h2>Extrato</h2>
+
 
     <section class="card">
 
@@ -809,14 +942,18 @@ body {
 
             <div class="movimento">
 
-                <div class="mov-icon entrada">＋</div>
+                <div class="mov-icon entrada">
+                    ＋
+                </div>
 
                 <div class="mov-info">
 
-                    <strong>Saldo inicial</strong>
+                    <strong>
+                        Saldo inicial
+                    </strong>
 
                     <small>
-                        22/09/2026 • Conta demonstrativa
+                        Conta demonstrativa
                     </small>
 
                 </div>
@@ -835,33 +972,53 @@ body {
 
 
 <!-- CARTÃO -->
-<section id="cartaoTela" class="tela">
+
+<section
+    id="cartaoTela"
+    class="tela"
+>
 
     <h2>Meu cartão</h2>
+
 
     <section class="card">
 
         <div class="cartao">
 
             <div class="cartao-topo">
-                <strong>BANCO ARANDU</strong>
-                <span>💳</span>
+
+                <strong>
+                    BANCO ARANDU
+                </strong>
+
+                <span>
+                    💳
+                </span>
+
             </div>
+
 
             <div class="numero">
                 •••• •••• •••• 2026
             </div>
 
-            <small>CARTÃO FICTÍCIO</small>
+
+            <small>
+                CARTÃO FICTÍCIO
+            </small>
 
         </div>
 
+
         <br>
 
-        <p>Cartão demonstrativo</p>
+        <p>
+            Cartão demonstrativo
+        </p>
 
         <small>
-            Este cartão não possui função de pagamento real.
+            Este cartão não possui função
+            de pagamento real.
         </small>
 
     </section>
@@ -870,15 +1027,25 @@ body {
 
 
 <!-- AJUSTES -->
-<section id="ajustesTela" class="tela">
+
+<section
+    id="ajustesTela"
+    class="tela"
+>
 
     <h2>Ajustes</h2>
 
+
     <div class="config-item">
 
-        <span>🌙 Modo escuro</span>
+        <span>
+            🌙 Modo escuro
+        </span>
 
-        <button onclick="modoEscuro()">
+        <button
+            type="button"
+            onclick="modoEscuro()"
+        >
             Alterar
         </button>
 
@@ -887,9 +1054,14 @@ body {
 
     <div class="config-item">
 
-        <span>👤 Perfil demonstrativo</span>
+        <span>
+            👤 Perfil demonstrativo
+        </span>
 
-        <button onclick="alert('Perfil fictício do Banco Arandu')">
+        <button
+            type="button"
+            onclick="alert('Perfil fictício do Banco Arandu')"
+        >
             Ver
         </button>
 
@@ -898,9 +1070,14 @@ body {
 
     <div class="config-item">
 
-        <span>ℹ️ Sobre o Arandu</span>
+        <span>
+            ℹ️ Sobre o Arandu
+        </span>
 
-        <button onclick="alert('Banco Arandu — sistema demonstrativo')">
+        <button
+            type="button"
+            onclick="alert('Banco Arandu — sistema demonstrativo')"
+        >
             Ver
         </button>
 
@@ -921,35 +1098,55 @@ body {
 
 
 <!-- MENU -->
+
 <nav class="menu">
 
     <button
         class="ativo"
+        type="button"
         onclick="abrirTela('inicio', this)"
     >
+
         <span>⌂</span>
+
         Início
+
     </button>
 
+
     <button
+        type="button"
         onclick="abrirTela('extratoTela', this)"
     >
+
         <span>▤</span>
+
         Extrato
+
     </button>
 
+
     <button
+        type="button"
         onclick="abrirTela('cartaoTela', this)"
     >
+
         <span>▣</span>
+
         Cartão
+
     </button>
 
+
     <button
+        type="button"
         onclick="abrirTela('ajustesTela', this)"
     >
+
         <span>⚙</span>
+
         Ajustes
+
     </button>
 
 </nav>
@@ -962,114 +1159,180 @@ body {
 <script>
 
 let saldo = 2500;
+
 let quantidadeNotificacoes = 0;
 
 
-function entrar() {
+/* ENTRAR */
 
-    document.getElementById("entrada").style.display = "none";
+document
+    .getElementById("botaoEntrar")
+    .addEventListener("click", function() {
 
-    document.getElementById("appPrincipal").style.display = "block";
+        document
+            .getElementById("entrada")
+            .style.display = "none";
 
-}
+        document
+            .getElementById("appPrincipal")
+            .style.display = "block";
 
+    });
+
+
+/* SAIR */
 
 function sair() {
 
-    document.getElementById("appPrincipal").style.display = "none";
+    document
+        .getElementById("appPrincipal")
+        .style.display = "none";
 
-    document.getElementById("entrada").style.display = "flex";
+    document
+        .getElementById("entrada")
+        .style.display = "flex";
 
 }
 
+
+/* ABRIR TELA */
 
 function abrirTela(id, botao) {
 
     const telas =
         document.querySelectorAll(".tela");
 
+
     telas.forEach(function(tela) {
+
         tela.classList.remove("ativa");
+
     });
 
-    document
-        .getElementById(id)
-        .classList.add("ativa");
+
+    const tela =
+        document.getElementById(id);
+
+
+    if (tela) {
+
+        tela.classList.add("ativa");
+
+    }
 
 
     const botoes =
         document.querySelectorAll(".menu button");
 
+
     botoes.forEach(function(btn) {
+
         btn.classList.remove("ativo");
+
     });
 
 
     if (botao) {
+
         botao.classList.add("ativo");
+
     }
 
 }
 
+
+/* ABRIR TELA INTERNA */
 
 function abrirTelaPorId(id) {
 
     const telas =
         document.querySelectorAll(".tela");
 
+
     telas.forEach(function(tela) {
+
         tela.classList.remove("ativa");
+
     });
 
-    document
-        .getElementById(id)
-        .classList.add("ativa");
+
+    const tela =
+        document.getElementById(id);
+
+
+    if (tela) {
+
+        tela.classList.add("ativa");
+
+    }
 
 
     const botoes =
         document.querySelectorAll(".menu button");
 
+
     botoes.forEach(function(btn) {
+
         btn.classList.remove("ativo");
+
     });
 
 }
 
 
+/* ATUALIZAR SALDO */
+
 function atualizarSaldo() {
 
-    document.getElementById("saldo").textContent =
+    document
+        .getElementById("saldo")
+        .textContent =
         saldo.toLocaleString("pt-BR", {
+
             style: "currency",
+
             currency: "BRL"
+
         });
 
 }
 
 
+/* FORMATAR VALOR */
+
 function formatarValor(valor) {
 
     return valor.toLocaleString("pt-BR", {
+
         style: "currency",
+
         currency: "BRL"
+
     });
 
 }
 
+
+/* DATA E HORA */
 
 function dataAtual() {
 
     const agora = new Date();
 
-    return agora.toLocaleDateString("pt-BR") +
+
+    return (
+        agora.toLocaleDateString("pt-BR") +
         " • " +
         agora.toLocaleTimeString("pt-BR", {
             hour: "2-digit",
             minute: "2-digit"
-        });
+        })
+    );
 
 }
 
+
+/* ADICIONAR MOVIMENTAÇÃO */
 
 function adicionarMovimento(
     nome,
@@ -1084,6 +1347,7 @@ function adicionarMovimento(
     const resumo =
         document.getElementById("resumoExtrato");
 
+
     const movimento =
         document.createElement("div");
 
@@ -1094,11 +1358,14 @@ function adicionarMovimento(
     const classe =
         entrada ? "entrada" : "saida";
 
+
     const cor =
         entrada ? "positivo" : "negativo";
 
+
     const simbolo =
         entrada ? "+" : "−";
+
 
     const sinal =
         entrada ? "+" : "-";
@@ -1108,143 +1375,4 @@ function adicionarMovimento(
 
         <div class="mov-icon ${classe}">
             ${simbolo}
-        </div>
-
-        <div class="mov-info">
-
-            <strong>${nome}</strong>
-
-            <small>
-                ${dataAtual()} • ${detalhes}
-            </small>
-
-        </div>
-
-        <strong class="${cor}">
-            ${sinal} ${formatarValor(valor)}
-        </strong>
-
-    `;
-
-
-    extrato.prepend(
-        movimento.cloneNode(true)
-    );
-
-    resumo.prepend(movimento);
-
-}
-
-
-function adicionarNotificacao(
-    titulo,
-    texto
-) {
-
-    const lista =
-        document.getElementById(
-            "listaNotificacoes"
-        );
-
-
-    const vazio =
-        lista.querySelector("p");
-
-    if (vazio) {
-        vazio.remove();
-    }
-
-
-    const notificacao =
-        document.createElement("div");
-
-
-    notificacao.className =
-        "notificacao";
-
-
-    notificacao.innerHTML = `
-
-        <strong>${titulo}</strong>
-
-        <small>
-            ${texto}<br>
-            ${dataAtual()}
-        </small>
-
-    `;
-
-
-    lista.prepend(notificacao);
-
-
-    quantidadeNotificacoes++;
-
-
-    const badge =
-        document.getElementById("badge");
-
-    badge.textContent =
-        quantidadeNotificacoes;
-
-    badge.style.display =
-        "flex";
-
-}
-
-
-function mostrarNotificacoes() {
-
-    const painel =
-        document.getElementById(
-            "notificacoes"
-        );
-
-
-    if (painel.style.display === "block") {
-
-        painel.style.display = "none";
-
-    } else {
-
-        painel.style.display = "block";
-
-        quantidadeNotificacoes = 0;
-
-        const badge =
-            document.getElementById("badge");
-
-        badge.style.display = "none";
-
-    }
-
-}
-
-
-function depositar() {
-
-    const valor =
-        Number(
-            prompt(
-                "Digite um valor fictício para depositar:"
-            )
-        );
-
-
-    if (!valor || valor <= 0) {
-
-        alert("Digite um valor válido.");
-
-        return;
-
-    }
-
-
-    saldo += valor;
-
-
-    adicionarMovimento(
-        "Depósito simulado",
-        valor,
-        true,
-        "Depó
+    
