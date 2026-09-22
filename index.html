@@ -1,1378 +1,820 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Banco Arandu</title>
-
-<style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #eef3f0;
-    color: #17201d;
-}
-
-.app {
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-    min-height: 100vh;
-    padding-bottom: 85px;
-}
-
-/* LOGIN */
-
-#entrada {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 30px;
-}
-
-.logo-grande {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.icone {
-    width: 75px;
-    height: 75px;
-    margin: auto;
-    background: #126b4a;
-    color: white;
-    border-radius: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    font-weight: bold;
-}
-
-.logo-grande h1 {
-    color: #126b4a;
-    margin-bottom: 5px;
-}
-
-.logo-grande p {
-    color: #718078;
-}
-
-.entrar {
-    width: 100%;
-    padding: 17px;
-    border: none;
-    border-radius: 12px;
-    background: #126b4a;
-    color: white;
-    font-size: 17px;
-    cursor: pointer;
-}
-
-/* APP */
-
-#appPrincipal {
-    display: none;
-}
-
-.topo {
-    padding: 25px 20px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.usuario {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: #126b4a;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-.usuario small {
-    color: #718078;
-}
-
-.usuario strong {
-    display: block;
-    margin-top: 3px;
-}
-
-.topo-direita {
-    display: flex;
-    gap: 8px;
-}
-
-.topo-btn {
-    border: none;
-    background: white;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 19px;
-    position: relative;
-}
-
-.badge {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: #d93636;
-    color: white;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    font-size: 10px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.conteudo {
-    padding: 10px 20px;
-}
-
-.tela {
-    display: none;
-}
-
-.tela.ativa {
-    display: block;
-}
-
-/* SALDO */
-
-.saldo {
-    background: linear-gradient(135deg, #126b4a, #08442f);
-    color: white;
-    border-radius: 22px;
-    padding: 25px;
-    margin: 15px 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,.12);
-}
-
-.saldo small {
-    opacity: .8;
-}
-
-.saldo h2 {
-    font-size: 32px;
-    margin: 10px 0 0;
-}
-
-/* AÇÕES */
-
-.acoes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.acao {
-    border: none;
-    background: white;
-    border-radius: 15px;
-    padding: 16px 5px;
-    cursor: pointer;
-    color: #17201d;
-    font-size: 13px;
-}
-
-.acao span {
-    display: block;
-    color: #126b4a;
-    font-size: 23px;
-    margin-bottom: 6px;
-}
-
-/* CARDS */
-
-.card,
-.formulario {
-    background: white;
-    border-radius: 18px;
-    padding: 20px;
-    margin-bottom: 18px;
-}
-
-.card h3,
-.formulario h3 {
-    margin-top: 0;
-}
-
-/* EXTRATO */
-
-.movimento {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 0;
-    border-bottom: 1px solid #e5ebe7;
-}
-
-.movimento:last-child {
-    border-bottom: none;
-}
-
-.mov-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-weight: bold;
-}
-
-.entrada {
-    background: #dff4e8;
-    color: #16834f;
-}
-
-.saida {
-    background: #ffe3e3;
-    color: #c43d35;
-}
-
-.mov-info {
-    flex: 1;
-}
-
-.mov-info strong {
-    display: block;
-}
-
-.mov-info small {
-    color: #718078;
-}
-
-.positivo {
-    color: #16834f;
-}
-
-.negativo {
-    color: #c43d35;
-}
-
-/* FORMULÁRIOS */
-
-.formulario label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 6px;
-    font-weight: bold;
-}
-
-.formulario input {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #d8e1dc;
-    border-radius: 10px;
-    font-size: 16px;
-    outline: none;
-}
-
-.formulario input:focus {
-    border-color: #126b4a;
-}
-
-.botao-principal {
-    width: 100%;
-    margin-top: 18px;
-    padding: 15px;
-    border: none;
-    border-radius: 11px;
-    background: #126b4a;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-/* PIX */
-
-.pix-chave {
-    background: #eef8f3;
-    padding: 14px;
-    border-radius: 12px;
-    margin-top: 15px;
-}
-
-.pix-chave small {
-    color: #718078;
-    display: block;
-}
-
-.pix-chave strong {
-    display: block;
-    margin-top: 5px;
-    color: #126b4a;
-    word-break: break-all;
-}
-
-.qr {
-    width: 150px;
-    height: 150px;
-    margin: 18px auto;
-    background:
-        linear-gradient(45deg, #111 25%, transparent 25%),
-        linear-gradient(-45deg, #111 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #111 75%),
-        linear-gradient(-45deg, transparent 75%, #111 75%);
-    background-size: 20px 20px;
-    background-position:
-        0 0,
-        0 10px,
-        10px -10px,
-        -10px 0;
-    border: 10px solid white;
-    box-shadow: 0 0 0 1px #ddd;
-}
-
-/* NOTIFICAÇÕES */
-
-.notificacoes {
-    display: none;
-    position: absolute;
-    right: 20px;
-    top: 75px;
-    width: calc(100% - 40px);
-    max-width: 400px;
-    background: white;
-    border-radius: 16px;
-    padding: 18px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.18);
-    z-index: 20;
-}
-
-.notificacoes h3 {
-    margin-top: 0;
-}
-
-.notificacao {
-    padding: 12px 0;
-    border-bottom: 1px solid #e5ebe7;
-}
-
-.notificacao:last-child {
-    border-bottom: none;
-}
-
-.notificacao strong {
-    display: block;
-}
-
-.notificacao small {
-    color: #718078;
-}
-
-/* RECEBIMENTO */
-
-.recebimento {
-    display: none;
-    background: #dff4e8;
-    color: #126b4a;
-    padding: 18px;
-    border-radius: 15px;
-    margin-bottom: 18px;
-}
-
-.recebimento strong {
-    display: block;
-    font-size: 18px;
-    margin-bottom: 6px;
-}
-
-/* COMPROVANTE */
-
-.comprovante {
-    display: none;
-    background: #eef8f3;
-    border-radius: 15px;
-    padding: 18px;
-    margin-top: 18px;
-}
-
-.comprovante p {
-    margin: 8px 0;
-}
-
-/* CARTÃO */
-
-.cartao {
-    height: 180px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #202d29, #0b1210);
-    color: white;
-    padding: 22px;
-}
-
-.cartao-topo {
-    display: flex;
-    justify-content: space-between;
-}
-
-.numero {
-    margin-top: 50px;
-    letter-spacing: 3px;
-    font-size: 18px;
-}
-
-/* AJUSTES */
-
-.config-item {
-    background: white;
-    padding: 18px;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.config-item button {
-    border: none;
-    background: #126b4a;
-    color: white;
-    padding: 9px 13px;
-    border-radius: 9px;
-    cursor: pointer;
-}
-
-.aviso {
-    background: #fff3bf;
-    color: #665300;
-    padding: 14px;
-    border-radius: 12px;
-    font-size: 12px;
-    margin-top: 15px;
-}
-
-/* MENU */
-
-.menu {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 600px;
-    background: white;
-    border-top: 1px solid #dde4df;
-    display: flex;
-    justify-content: space-around;
-    padding: 9px 5px;
-    z-index: 10;
-}
-
-.menu button {
-    border: none;
-    background: transparent;
-    color: #718078;
-    font-size: 11px;
-    cursor: pointer;
-}
-
-.menu button span {
-    display: block;
-    font-size: 21px;
-    margin-bottom: 3px;
-}
-
-.menu button.ativo {
-    color: #126b4a;
-}
-
-@media (max-width: 450px) {
-
-    .saldo h2 {
-        font-size: 29px;
-    }
-
-    .acao {
-        font-size: 11px;
-    }
-
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Arandu</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #17202a;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+        }
+
+        #entrada {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,.08);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            border-radius: 20px;
+            background: #1769e0;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .login h1 {
+            margin-bottom: 8px;
+        }
+
+        .login p {
+            color: #68737d;
+            margin-bottom: 25px;
+        }
+
+        .entrar {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            background: #1769e0;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #appPrincipal {
+            display: none;
+            min-height: 100vh;
+            padding-bottom: 85px;
+        }
+
+        header {
+            background: white;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,.05);
+        }
+
+        .usuario {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #1769e0;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .usuario small {
+            color: #77818a;
+            display: block;
+        }
+
+        .usuario strong {
+            font-size: 17px;
+        }
+
+        .topo-direita {
+            display: flex;
+            gap: 8px;
+        }
+
+        .topo-btn {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: #eef3f8;
+            font-size: 20px;
+        }
+
+        .badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 4px;
+            border-radius: 10px;
+            background: #e53935;
+            color: white;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .conteudo {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .tela {
+            display: none;
+        }
+
+        .tela.ativa {
+            display: block;
+        }
+
+        .saldo-card {
+            background: #1769e0;
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .saldo-card small {
+            opacity: .85;
+        }
+
+        .saldo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .acoes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .acao {
+            background: white;
+            border-radius: 16px;
+            padding: 18px 8px;
+            font-weight: bold;
+            box-shadow: 0 3px 15px rgba(0,0,0,.06);
+        }
+
+        .acao span {
+            display: block;
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,.06);
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+        }
+
+        .campo {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            margin-bottom: 14px;
+            border: 1px solid #d7dde3;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .botao {
+            width: 100%;
+            padding: 14px;
+            border-radius: 11px;
+            background: #1769e0;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .voltar {
+            background: #e9eef3;
+            color: #17202a;
+            margin-top: 10px;
+        }
+
+        .movimento {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e8edf1;
+        }
+
+        .movimento:last-child {
+            border-bottom: none;
+        }
+
+        .entrada {
+            color: #16833b;
+        }
+
+        .saida {
+            color: #d93025;
+        }
+
+        .data {
+            font-size: 12px;
+            color: #7b858e;
+            margin-top: 4px;
+        }
+
+        .notificacoes {
+            display: none;
+            background: white;
+            position: absolute;
+            right: 15px;
+            top: 75px;
+            width: 300px;
+            max-width: calc(100% - 30px);
+            padding: 18px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.15);
+            z-index: 20;
+        }
+
+        .notificacoes h3 {
+            margin-bottom: 12px;
+        }
+
+        .notificacao {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .notificacao:last-child {
+            border-bottom: none;
+        }
+
+        .qr {
+            width: 180px;
+            height: 180px;
+            margin: 15px auto;
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    #000 0px,
+                    #000 4px,
+                    #fff 4px,
+                    #fff 8px
+                );
+            border: 8px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,.2);
+        }
+
+        .chave {
+            background: #f0f4f8;
+            padding: 13px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+
+        .cartao {
+            background: #17202a;
+            color: white;
+            height: 210px;
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cartao-numero {
+            font-size: 21px;
+            letter-spacing: 2px;
+        }
+
+        .aviso {
+            margin-top: 15px;
+            padding: 14px;
+            border-radius: 10px;
+            background: #fff4d6;
+            color: #705500;
+        }
+
+        .sucesso {
+            display: none;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background: #dff6e7;
+            color: #176b35;
+            font-weight: bold;
+        }
+
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 12px rgba(0,0,0,.08);
+            z-index: 30;
+        }
+
+        nav button {
+            background: transparent;
+            color: #65717b;
+            font-size: 12px;
+            padding: 8px;
+        }
+
+        nav button.ativo {
+            color: #1769e0;
+            font-weight: bold;
+        }
+
+        body.escuro {
+            background: #111820;
+            color: #f4f6f8;
+        }
+
+        body.escuro header,
+        body.escuro .login,
+        body.escuro .card,
+        body.escuro .acao,
+        body.escuro nav,
+        body.escuro .notificacoes {
+            background: #1c2732;
+            color: white;
+        }
+
+        body.escuro .campo,
+        body.escuro .chave {
+            background: #273542;
+            color: white;
+            border-color: #43515d;
+        }
+
+        @media (max-width: 500px) {
+            .acoes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="app">
+    <!-- LOGIN -->
+    <section id="entrada">
+        <div class="login">
+            <div class="logo">A</div>
+            <h1>Banco Arandu</h1>
+            <p>Conta bancária demonstrativa</p>
 
-<!-- LOGIN -->
-
-<section id="entrada">
-
-    <div class="logo-grande">
-
-        <div class="icone">A</div>
-
-        <h1>Banco Arandu</h1>
-
-        <p>
-            Uma experiência bancária demonstrativa
-        </p>
-
-    </div>
-
-    <!-- BOTÃO CORRIGIDO -->
-
-    <button
-        id="botaoEntrar"
-        class="entrar"
-        type="button"
-    >
-        Entrar na conta demonstrativa
-    </button>
-
-</section>
-
-
-<!-- APLICATIVO -->
-
-<section id="appPrincipal">
-
-<header class="topo">
-
-    <div class="usuario">
-
-        <div class="avatar">U</div>
-
-        <div>
-
-            <small>Olá,</small>
-
-            <strong>Usuário</strong>
-
+            <button id="botaoEntrar" class="entrar" type="button">
+                Entrar na conta demonstrativa
+            </button>
         </div>
-
-    </div>
-
-
-    <div class="topo-direita">
-
-        <button
-            class="topo-btn"
-            type="button"
-            onclick="mostrarNotificacoes()"
-        >
-            🔔
-
-            <span
-                id="badge"
-                class="badge"
-            >
-                0
-            </span>
-
-        </button>
-
-
-        <button
-            class="topo-btn"
-            type="button"
-            onclick="sair()"
-        >
-            ↪
-        </button>
-
-    </div>
-
-</header>
-
-
-<div
-    id="notificacoes"
-    class="notificacoes"
->
-
-    <h3>Notificações</h3>
-
-    <div id="listaNotificacoes">
-
-        <p style="color:#718078;">
-            Nenhuma notificação nova.
-        </p>
-
-    </div>
-
-</div>
-
-
-<main class="conteudo">
-
-
-<!-- INÍCIO -->
-
-<section
-    id="inicio"
-    class="tela ativa"
->
-
-    <h2>Visão geral</h2>
-
-
-    <div class="saldo">
-
-        <small>Saldo disponível</small>
-
-        <h2 id="saldo">
-            R$ 2.500,00
-        </h2>
-
-    </div>
-
-
-    <div class="acoes">
-
-        <button
-            class="acao"
-            type="button"
-            onclick="depositar()"
-        >
-
-            <span>＋</span>
-
-            Depositar
-
-        </button>
-
-
-        <button
-            class="acao"
-            type="button"
-            onclick="abrirTelaPorId('pixEnviarTela')"
-        >
-
-            <span>⚡</span>
-
-            Enviar Pix
-
-        </button>
-
-
-        <button
-            class="acao"
-            type="button"
-            onclick="abrirTelaPorId('pixReceberTela')"
-        >
-
-            <span>⇩</span>
-
-            Receber Pix
-
-        </button>
-
-    </div>
-
-
-    <section class="card">
-
-        <h3>Últimas movimentações</h3>
-
-        <div id="resumoExtrato">
-
-            <div class="movimento">
-
-                <div class="mov-icon entrada">
-                    ＋
-                </div>
-
-                <div class="mov-info">
-
-                    <strong>
-                        Saldo inicial
-                    </strong>
-
-                    <small>
-                        Conta demonstrativa
-                    </small>
-
-                </div>
-
-                <strong class="positivo">
-                    + R$ 2.500,00
-                </strong>
-
-            </div>
-
-        </div>
-
     </section>
 
-</section>
+
+    <!-- APLICATIVO -->
+    <div id="appPrincipal">
+
+        <header>
+            <div class="usuario">
+                <div class="avatar">U</div>
+
+                <div>
+                    <small>Olá,</small>
+                    <strong>Usuário</strong>
+                </div>
+            </div>
+
+            <div class="topo-direita">
+                <button id="botaoNotificacoes" class="topo-btn" type="button">
+                    🔔
+                    <span id="badge" class="badge">0</span>
+                </button>
+
+                <button id="botaoSair" class="topo-btn" type="button">
+                    ↪
+                </button>
+            </div>
+        </header>
 
 
-<!-- ENVIAR PIX -->
+        <!-- NOTIFICAÇÕES -->
+        <div id="notificacoes" class="notificacoes">
+            <h3>Notificações</h3>
 
-<section
-    id="pixEnviarTela"
-    class="tela"
->
-
-    <h2>Enviar Pix</h2>
-
-
-    <div class="formulario">
-
-        <h3>Novo Pix</h3>
-
-
-        <label for="chavePixDestino">
-            Chave Pix
-        </label>
-
-        <input
-            type="text"
-            id="chavePixDestino"
-            placeholder="Ex: joao@email.com"
-        >
-
-
-        <label for="nomePixDestino">
-            Nome de quem vai receber
-        </label>
-
-        <input
-            type="text"
-            id="nomePixDestino"
-            placeholder="Ex: João"
-        >
-
-
-        <label for="valorPixEnvio">
-            Valor
-        </label>
-
-        <input
-            type="number"
-            id="valorPixEnvio"
-            placeholder="Ex: 900"
-            min="0.01"
-            step="0.01"
-        >
-
-
-        <button
-            class="botao-principal"
-            type="button"
-            onclick="enviarPix()"
-        >
-            Enviar Pix
-        </button>
-
-    </div>
-
-
-    <div
-        id="comprovanteEnvio"
-        class="comprovante"
-    >
-
-        <h3>Pix realizado</h3>
-
-        <p id="dadosComprovante"></p>
-
-    </div>
-
-
-    <button
-        class="botao-principal"
-        type="button"
-        onclick="abrirTelaPorId('inicio')"
-    >
-        Voltar
-    </button>
-
-</section>
-
-
-<!-- RECEBER PIX -->
-
-<section
-    id="pixReceberTela"
-    class="tela"
->
-
-    <h2>Receber Pix</h2>
-
-
-    <div
-        id="mensagemRecebimento"
-        class="recebimento"
-    >
-
-        <strong>
-            Pix recebido!
-        </strong>
-
-        <span id="textoRecebimento"></span>
-
-    </div>
-
-
-    <div class="formulario">
-
-        <h3>Minha chave Pix</h3>
-
-
-        <div class="pix-chave">
-
-            <small>
-                Chave Pix fictícia
-            </small>
-
-            <strong id="minhaChave">
-                usuario@arandu.demo
-            </strong>
-
+            <div id="listaNotificacoes">
+                <p>Nenhuma operação recente.</p>
+            </div>
         </div>
 
 
-        <button
-            class="botao-principal"
-            type="button"
-            onclick="copiarChave()"
-        >
-            Copiar chave
-        </button>
+        <main class="conteudo">
 
-    </div>
+            <!-- INÍCIO -->
+            <section id="inicio" class="tela ativa">
 
-
-    <div class="formulario">
-
-        <h3>Simular recebimento</h3>
-
-
-        <label for="nomeRemetente">
-            Quem te mandou o Pix?
-        </label>
-
-        <input
-            type="text"
-            id="nomeRemetente"
-            placeholder="Ex: João"
-        >
-
-
-        <label for="valorPixRecebimento">
-            Valor
-        </label>
-
-        <input
-            type="number"
-            id="valorPixRecebimento"
-            placeholder="Ex: 900"
-            min="0.01"
-            step="0.01"
-        >
-
-
-        <button
-            class="botao-principal"
-            type="button"
-            onclick="receberPix()"
-        >
-            Confirmar recebimento
-        </button>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>QR Code Pix</h3>
-
-        <div class="qr"></div>
-
-        <p style="text-align:center;">
-            QR Code demonstrativo
-        </p>
-
-    </div>
-
-
-    <button
-        class="botao-principal"
-        type="button"
-        onclick="abrirTelaPorId('inicio')"
-    >
-        Voltar
-    </button>
-
-</section>
-
-
-<!-- EXTRATO -->
-
-<section
-    id="extratoTela"
-    class="tela"
->
-
-    <h2>Extrato</h2>
-
-
-    <section class="card">
-
-        <h3>Todas as movimentações</h3>
-
-        <div id="extrato">
-
-            <div class="movimento">
-
-                <div class="mov-icon entrada">
-                    ＋
+                <div class="saldo-card">
+                    <small>Saldo disponível</small>
+                    <div id="saldo" class="saldo">R$ 2.500,00</div>
                 </div>
 
-                <div class="mov-info">
+                <div class="acoes">
 
-                    <strong>
-                        Saldo inicial
-                    </strong>
+                    <button id="botaoDepositar" class="acao" type="button">
+                        <span>＋</span>
+                        Depositar
+                    </button>
 
-                    <small>
-                        Conta demonstrativa
-                    </small>
+                    <button id="botaoEnviarPix" class="acao" type="button">
+                        <span>⚡</span>
+                        Enviar Pix
+                    </button>
+
+                    <button id="botaoReceberPix" class="acao" type="button">
+                        <span>⇩</span>
+                        Receber Pix
+                    </button>
+
+                </div>
+            </section>
+
+
+            <!-- ENVIAR PIX -->
+            <section id="pixEnviarTela" class="tela">
+
+                <div class="card">
+
+                    <h2>Enviar Pix</h2>
+
+                    <label>Chave Pix</label>
+                    <input
+                        id="chavePixDestino"
+                        class="campo"
+                        type="text"
+                        placeholder="Digite a chave Pix"
+                    >
+
+                    <label>Nome de quem vai receber</label>
+                    <input
+                        id="nomePixDestino"
+                        class="campo"
+                        type="text"
+                        placeholder="Nome do destinatário"
+                    >
+
+                    <label>Valor</label>
+                    <input
+                        id="valorPixEnvio"
+                        class="campo"
+                        type="text"
+                        inputmode="decimal"
+                        placeholder="R$ 0,00"
+                    >
+
+                    <button id="botaoEnviarPixConfirmar" class="botao" type="button">
+                        Enviar Pix
+                    </button>
+
+                    <div id="comprovanteEnvio" class="sucesso">
+                        <div id="dadosComprovante"></div>
+                    </div>
+
+                    <button id="botaoVoltarEnviar" class="botao voltar" type="button">
+                        Voltar
+                    </button>
+
+                </div>
+            </section>
+
+
+            <!-- RECEBER PIX -->
+            <section id="pixReceberTela" class="tela">
+
+                <div class="card">
+
+                    <h2>Receber Pix</h2>
+
+                    <p>Sua chave Pix demonstrativa:</p>
+
+                    <div id="minhaChave" class="chave">
+                        usuario@arandu.demo
+                    </div>
+
+                    <button id="botaoCopiarChave" class="botao" type="button">
+                        Copiar chave
+                    </button>
+
+                    <div class="qr"></div>
+
+                    <label>Quem te mandou o dinheiro?</label>
+                    <input
+                        id="nomeRemetente"
+                        class="campo"
+                        type="text"
+                        placeholder="Nome do remetente"
+                    >
+
+                    <label>Valor</label>
+                    <input
+                        id="valorPixRecebimento"
+                        class="campo"
+                        type="text"
+                        inputmode="decimal"
+                        placeholder="R$ 0,00"
+                    >
+
+                    <button id="botaoReceberPixConfirmar" class="botao" type="button">
+                        Simular recebimento
+                    </button>
+
+                    <div id="mensagemRecebimento" class="sucesso">
+                        <div id="textoRecebimento"></div>
+                    </div>
+
+                    <button id="botaoVoltarReceber" class="botao voltar" type="button">
+                        Voltar
+                    </button>
+
+                </div>
+            </section>
+
+
+            <!-- EXTRATO -->
+            <section id="extratoTela" class="tela">
+
+                <div class="card">
+
+                    <h2>Extrato</h2>
+
+                    <div id="listaExtrato">
+
+                        <div class="movimento">
+                            <div>
+                                <strong>Saldo inicial</strong>
+                                <div class="data">Conta demonstrativa</div>
+                            </div>
+
+                            <strong class="entrada">
+                                + R$ 2.500,00
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- CARTÃO -->
+            <section id="cartaoTela" class="tela">
+
+                <div class="card">
+                    <h2>Cartão</h2>
+
+                    <div class="cartao">
+                        <strong>Banco Arandu</strong>
+
+                        <div class="cartao-numero">
+                            •••• •••• •••• 2026
+                        </div>
+
+                        <div>
+                            <small>USUÁRIO</small>
+                        </div>
+                    </div>
+
+                    <div class="aviso">
+                        Este cartão é fictício e não possui função de pagamento real.
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- AJUSTES -->
+            <section id="ajustesTela" class="tela">
+
+                <div class="card">
+
+                    <h2>Ajustes</h2>
+
+                    <button id="botaoModoEscuro" class="botao" type="button">
+                        Alternar modo escuro
+                    </button>
+
+                    <div class="aviso">
+                        Banco Arandu é uma demonstração fictícia.
+                        Não coloque informações bancárias reais neste site.
+                    </div>
 
                 </div>
 
-                <strong class="positivo">
-                    + R$ 2.500,00
-                </strong>
+            </section>
 
-            </div>
-
-        </div>
-
-    </section>
-
-</section>
+        </main>
 
 
-<!-- CARTÃO -->
+        <!-- MENU INFERIOR -->
+        <nav>
 
-<section
-    id="cartaoTela"
-    class="tela"
->
+            <button id="navInicio" class="ativo" type="button">
+                🏠<br>
+                Início
+            </button>
 
-    <h2>Meu cartão</h2>
+            <button id="navExtrato" type="button">
+                📄<br>
+                Extrato
+            </button>
 
+            <button id="navCartao" type="button">
+                💳<br>
+                Cartão
+            </button>
 
-    <section class="card">
+            <button id="navAjustes" type="button">
+                ⚙️<br>
+                Ajustes
+            </button>
 
-        <div class="cartao">
-
-            <div class="cartao-topo">
-
-                <strong>
-                    BANCO ARANDU
-                </strong>
-
-                <span>
-                    💳
-                </span>
-
-            </div>
-
-
-            <div class="numero">
-                •••• •••• •••• 2026
-            </div>
-
-
-            <small>
-                CARTÃO FICTÍCIO
-            </small>
-
-        </div>
-
-
-        <br>
-
-        <p>
-            Cartão demonstrativo
-        </p>
-
-        <small>
-            Este cartão não possui função
-            de pagamento real.
-        </small>
-
-    </section>
-
-</section>
-
-
-<!-- AJUSTES -->
-
-<section
-    id="ajustesTela"
-    class="tela"
->
-
-    <h2>Ajustes</h2>
-
-
-    <div class="config-item">
-
-        <span>
-            🌙 Modo escuro
-        </span>
-
-        <button
-            type="button"
-            onclick="modoEscuro()"
-        >
-            Alterar
-        </button>
+        </nav>
 
     </div>
 
 
-    <div class="config-item">
+    <script>
 
-        <span>
-            👤 Perfil demonstrativo
-        </span>
+        /* =========================
+           DADOS DA CONTA
+        ========================= */
 
-        <button
-            type="button"
-            onclick="alert('Perfil fictício do Banco Arandu')"
-        >
-            Ver
-        </button>
-
-    </div>
+        let saldo = 2500;
+        let quantidadeNotificacoes = 0;
 
 
-    <div class="config-item">
+        /* =========================
+           ELEMENTOS
+        ========================= */
 
-        <span>
-            ℹ️ Sobre o Arandu
-        </span>
-
-        <button
-            type="button"
-            onclick="alert('Banco Arandu — sistema demonstrativo')"
-        >
-            Ver
-        </button>
-
-    </div>
+        const entrada = document.getElementById("entrada");
+        const appPrincipal = document.getElementById("appPrincipal");
 
 
-    <div class="aviso">
-
-        ⚠️ Este site é apenas uma demonstração.
-        Não insira senhas, CPF, cartões ou outros
-        dados bancários reais.
-
-    </div>
-
-</section>
-
-</main>
-
-
-<!-- MENU -->
-
-<nav class="menu">
-
-    <button
-        class="ativo"
-        type="button"
-        onclick="abrirTela('inicio', this)"
-    >
-
-        <span>⌂</span>
-
-        Início
-
-    </button>
-
-
-    <button
-        type="button"
-        onclick="abrirTela('extratoTela', this)"
-    >
-
-        <span>▤</span>
-
-        Extrato
-
-    </button>
-
-
-    <button
-        type="button"
-        onclick="abrirTela('cartaoTela', this)"
-    >
-
-        <span>▣</span>
-
-        Cartão
-
-    </button>
-
-
-    <button
-        type="button"
-        onclick="abrirTela('ajustesTela', this)"
-    >
-
-        <span>⚙</span>
-
-        Ajustes
-
-    </button>
-
-</nav>
-
-</section>
-
-</div>
-
-
-<script>
-
-let saldo = 2500;
-
-let quantidadeNotificacoes = 0;
-
-
-/* ENTRAR */
-
-document
-    .getElementById("botaoEntrar")
-    .addEventListener("click", function() {
+        /* =========================
+           ENTRAR
+        ========================= */
 
         document
-            .getElementById("entrada")
-            .style.display = "none";
+            .getElementById("botaoEntrar")
+            .addEventListener("click", function () {
+
+                entrada.style.display = "none";
+                appPrincipal.style.display = "block";
+
+            });
+
+
+        /* =========================
+           SAIR
+        ========================= */
 
         document
-            .getElementById("appPrincipal")
-            .style.display = "block";
+            .getElementById("botaoSair")
+            .addEventListener("click", function () {
 
-    });
+                appPrincipal.style.display = "none";
+                entrada.style.display = "flex";
 
+            });
 
-/* SAIR */
 
-function sair() {
+        /* =========================
+           ABRIR TELAS
+        ========================= */
 
-    document
-        .getElementById("appPrincipal")
-        .style.display = "none";
+        function abrirTela(id) {
 
-    document
-        .getElementById("entrada")
-        .style.display = "flex";
+            const telas = document.querySelectorAll(".tela");
 
-}
+            telas.forEach(function (tela) {
+                tela.classList.remove("ativa");
+            });
 
+            document
+                .getElementById(id)
+                .classList.add("ativa");
 
-/* ABRIR TELA */
+            document
+                .getElementById("notificacoes")
+                .style.display = "none";
+        }
 
-function abrirTela(id, botao) {
 
-    const telas =
-        document.querySelectorAll(".tela");
+        /* =========================
+           MENU
+        ========================= */
 
+        document
+            .getElementById("navInicio")
+            .addEventListener("click", function () {
 
-    telas.forEach(function(tela) {
+                abrirTela("inicio");
+                atualizarMenu("navInicio");
 
-        tela.classList.remove("ativa");
+            });
 
-    });
 
+        document
+            .getElementById("navExtrato")
+            .addEventListener("click", function () {
 
-    const tela =
-        document.getElementById(id);
+                abrirTela("extratoTela");
+                atualizarMenu("navExtrato");
 
+            });
 
-    if (tela) {
 
-        tela.classList.add("ativa");
+        document
+            .getElementById("navCartao")
+            .addEventListener("click", function () {
 
-    }
+                abrirTela("cartaoTela");
+                atualizarMenu("navCartao");
 
+            });
 
-    const botoes =
-        document.querySelectorAll(".menu button");
 
+        document
+            .getElementById("navAjustes")
+            .addEventListener("click", function () {
 
-    botoes.forEach(function(btn) {
+                abrirTela("ajustesTela");
+                atualizarMenu("navAjustes");
 
-        btn.classList.remove("ativo");
+            });
 
-    });
 
+        function atualizarMenu(idAtivo) {
 
-    if (botao) {
+            const botoes = document.querySelectorAll("nav button");
 
-        botao.classList.add("ativo");
+            botoes.forEach(function (botao) {
+                botao.classList.remove("ativo");
+            });
 
-    }
+            document
+                .getElementById(idAtivo)
+                .classList.add("ativo");
+        }
 
-}
 
-
-/* ABRIR TELA INTERNA */
-
-function abrirTelaPorId(id) {
-
-    const telas =
-        document.querySelectorAll(".tela");
-
-
-    telas.forEach(function(tela) {
-
-        tela.classList.remove("ativa");
-
-    });
-
-
-    const tela =
-        document.getElementById(id);
-
-
-    if (tela) {
-
-        tela.classList.add("ativa");
-
-    }
-
-
-    const botoes =
-        document.querySelectorAll(".menu button");
-
-
-    botoes.forEach(function(btn) {
-
-        btn.classList.remove("ativo");
-
-    });
-
-}
-
-
-/* ATUALIZAR SALDO */
-
-function atualizarSaldo() {
-
-    document
-        .getElementById("saldo")
-        .textContent =
-        saldo.toLocaleString("pt-BR", {
-
-            style: "currency",
-
-            currency: "BRL"
-
-        });
-
-}
-
-
-/* FORMATAR VALOR */
-
-function formatarValor(valor) {
-
-    return valor.toLocaleString("pt-BR", {
-
-        style: "currency",
-
-        currency: "BRL"
-
-    });
-
-}
-
-
-/* DATA E HORA */
-
-function dataAtual() {
-
-    const agora = new Date();
-
-
-    return (
-        agora.toLocaleDateString("pt-BR") +
-        " • " +
-        agora.toLocaleTimeString("pt-BR", {
-            hour: "2-digit",
-            minute: "2-digit"
-        })
-    );
-
-}
-
-
-/* ADICIONAR MOVIMENTAÇÃO */
-
-function adicionarMovimento(
-    nome,
-    valor,
-    entrada,
-    detalhes
-) {
-
-    const extrato =
-        document.getElementById("extrato");
-
-    const resumo =
-        document.getElementById("resumoExtrato");
-
-
-    const movimento =
-        document.createElement("div");
-
-
-    movimento.className = "movimento";
-
-
-    const classe =
-        entrada ? "entrada" : "saida";
-
-
-    const cor =
-        entrada ? "positivo" : "negativo";
-
-
-    const simbolo =
-        entrada ? "+" : "−";
-
-
-    const sinal =
-        entrada ? "+" : "-";
-
-
-    movimento.innerHTML = `
-
-        <div class="mov-icon ${classe}">
-            ${simbolo}
-    
+        /* ========
