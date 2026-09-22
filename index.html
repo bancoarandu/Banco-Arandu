@@ -1,820 +1,1193 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banco Arandu</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+<title>Banco Arandu</title>
 
-        body {
-            background: #f4f6f8;
-            color: #17202a;
-        }
+<style>
 
-        button {
-            cursor: pointer;
-            border: none;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        #entrada {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef3f0;
+    color: #17201d;
+}
 
-        .login {
-            width: 100%;
-            max-width: 400px;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,.08);
-        }
+.app {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    min-height: 100vh;
+    padding-bottom: 85px;
+}
 
-        .logo {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 15px;
-            border-radius: 20px;
-            background: #1769e0;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: bold;
-        }
+/* ENTRADA */
 
-        .login h1 {
-            margin-bottom: 8px;
-        }
+#entrada {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+}
 
-        .login p {
-            color: #68737d;
-            margin-bottom: 25px;
-        }
+.logo-grande {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .entrar {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            background: #1769e0;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-        }
+.icone {
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    background: #126b4a;
+    color: white;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
+}
 
-        #appPrincipal {
-            display: none;
-            min-height: 100vh;
-            padding-bottom: 85px;
-        }
+.logo-grande h1 {
+    color: #126b4a;
+    margin-bottom: 5px;
+}
 
-        header {
-            background: white;
-            padding: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,.05);
-        }
+.logo-grande p {
+    color: #718078;
+}
 
-        .usuario {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+.entrar {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 12px;
+    background: #126b4a;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
 
-        .avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: #1769e0;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 20px;
-        }
+/* APLICATIVO */
 
-        .usuario small {
-            color: #77818a;
-            display: block;
-        }
+#appPrincipal {
+    display: none;
+}
 
-        .usuario strong {
-            font-size: 17px;
-        }
+.topo {
+    padding: 25px 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .topo-direita {
-            display: flex;
-            gap: 8px;
-        }
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-        .topo-btn {
-            position: relative;
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: #eef3f8;
-            font-size: 20px;
-        }
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #126b4a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
 
-        .badge {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            min-width: 18px;
-            height: 18px;
-            padding: 0 4px;
-            border-radius: 10px;
-            background: #e53935;
-            color: white;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.usuario small {
+    color: #718078;
+}
 
-        .conteudo {
-            max-width: 700px;
-            margin: auto;
-            padding: 20px;
-        }
+.usuario strong {
+    display: block;
+    margin-top: 3px;
+}
 
-        .tela {
-            display: none;
-        }
+.sair {
+    border: none;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
-        .tela.ativa {
-            display: block;
-        }
+.conteudo {
+    padding: 10px 20px;
+}
 
-        .saldo-card {
-            background: #1769e0;
-            color: white;
-            padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-        }
+/* TELAS */
 
-        .saldo-card small {
-            opacity: .85;
-        }
+.tela {
+    display: none;
+}
 
-        .saldo {
-            font-size: 32px;
-            font-weight: bold;
-            margin-top: 8px;
-        }
+.tela.ativa {
+    display: block;
+}
 
-        .acoes {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
+/* SALDO */
 
-        .acao {
-            background: white;
-            border-radius: 16px;
-            padding: 18px 8px;
-            font-weight: bold;
-            box-shadow: 0 3px 15px rgba(0,0,0,.06);
-        }
+.saldo {
+    background: linear-gradient(135deg, #126b4a, #08442f);
+    color: white;
+    border-radius: 22px;
+    padding: 25px;
+    margin: 15px 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
 
-        .acao span {
-            display: block;
-            font-size: 25px;
-            margin-bottom: 7px;
-        }
+.saldo small {
+    opacity: .8;
+}
 
-        .card {
-            background: white;
-            padding: 22px;
-            border-radius: 18px;
-            margin-bottom: 15px;
-            box-shadow: 0 3px 15px rgba(0,0,0,.06);
-        }
+.saldo h2 {
+    font-size: 32px;
+    margin: 10px 0 0;
+}
 
-        .card h2 {
-            margin-bottom: 15px;
-        }
+/* AÇÕES */
 
-        .campo {
-            width: 100%;
-            padding: 14px;
-            margin-top: 8px;
-            margin-bottom: 14px;
-            border: 1px solid #d7dde3;
-            border-radius: 10px;
-            font-size: 16px;
-        }
+.acoes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
 
-        .botao {
-            width: 100%;
-            padding: 14px;
-            border-radius: 11px;
-            background: #1769e0;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-        }
+.acao {
+    border: none;
+    background: white;
+    border-radius: 15px;
+    padding: 16px 5px;
+    cursor: pointer;
+    color: #17201d;
+}
 
-        .voltar {
-            background: #e9eef3;
-            color: #17202a;
-            margin-top: 10px;
-        }
+.acao span {
+    display: block;
+    color: #126b4a;
+    font-size: 23px;
+    margin-bottom: 6px;
+}
 
-        .movimento {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #e8edf1;
-        }
+/* CARDS */
 
-        .movimento:last-child {
-            border-bottom: none;
-        }
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 18px;
+}
 
-        .entrada {
-            color: #16833b;
-        }
+.card h3 {
+    margin-top: 0;
+}
 
-        .saida {
-            color: #d93025;
-        }
+/* EXTRATO */
 
-        .data {
-            font-size: 12px;
-            color: #7b858e;
-            margin-top: 4px;
-        }
+.movimento {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 0;
+    border-bottom: 1px solid #e5ebe7;
+}
 
-        .notificacoes {
-            display: none;
-            background: white;
-            position: absolute;
-            right: 15px;
-            top: 75px;
-            width: 300px;
-            max-width: calc(100% - 30px);
-            padding: 18px;
-            border-radius: 15px;
-            box-shadow: 0 8px 30px rgba(0,0,0,.15);
-            z-index: 20;
-        }
+.movimento:last-child {
+    border-bottom: none;
+}
 
-        .notificacoes h3 {
-            margin-bottom: 12px;
-        }
+.mov-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .notificacao {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-        }
+.entrada {
+    background: #dff4e8;
+    color: #16834f;
+}
 
-        .notificacao:last-child {
-            border-bottom: none;
-        }
+.saida {
+    background: #ffe3e3;
+    color: #c43d35;
+}
 
-        .qr {
-            width: 180px;
-            height: 180px;
-            margin: 15px auto;
-            background:
-                repeating-linear-gradient(
-                    45deg,
-                    #000 0px,
-                    #000 4px,
-                    #fff 4px,
-                    #fff 8px
-                );
-            border: 8px solid white;
-            box-shadow: 0 2px 10px rgba(0,0,0,.2);
-        }
+.mov-info {
+    flex: 1;
+}
 
-        .chave {
-            background: #f0f4f8;
-            padding: 13px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 10px 0;
-            word-break: break-all;
-        }
+.mov-info strong {
+    display: block;
+}
 
-        .cartao {
-            background: #17202a;
-            color: white;
-            height: 210px;
-            border-radius: 20px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+.mov-info small {
+    color: #718078;
+}
 
-        .cartao-numero {
-            font-size: 21px;
-            letter-spacing: 2px;
-        }
+.positivo {
+    color: #16834f;
+}
 
-        .aviso {
-            margin-top: 15px;
-            padding: 14px;
-            border-radius: 10px;
-            background: #fff4d6;
-            color: #705500;
-        }
+.negativo {
+    color: #c43d35;
+}
 
-        .sucesso {
-            display: none;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            background: #dff6e7;
-            color: #176b35;
-            font-weight: bold;
-        }
+/* CARTÃO */
 
-        nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 70px;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 0 -2px 12px rgba(0,0,0,.08);
-            z-index: 30;
-        }
+.cartao {
+    height: 180px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #202d29, #0b1210);
+    color: white;
+    padding: 22px;
+}
 
-        nav button {
-            background: transparent;
-            color: #65717b;
-            font-size: 12px;
-            padding: 8px;
-        }
+.cartao-topo {
+    display: flex;
+    justify-content: space-between;
+}
 
-        nav button.ativo {
-            color: #1769e0;
-            font-weight: bold;
-        }
+.numero {
+    margin-top: 50px;
+    letter-spacing: 3px;
+    font-size: 18px;
+}
 
-        body.escuro {
-            background: #111820;
-            color: #f4f6f8;
-        }
+/* AJUSTES */
 
-        body.escuro header,
-        body.escuro .login,
-        body.escuro .card,
-        body.escuro .acao,
-        body.escuro nav,
-        body.escuro .notificacoes {
-            background: #1c2732;
-            color: white;
-        }
+.config-item {
+    background: white;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        body.escuro .campo,
-        body.escuro .chave {
-            background: #273542;
-            color: white;
-            border-color: #43515d;
-        }
+.config-item button {
+    border: none;
+    background: #126b4a;
+    color: white;
+    padding: 9px 13px;
+    border-radius: 9px;
+    cursor: pointer;
+}
 
-        @media (max-width: 500px) {
-            .acoes {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+/* AVISO */
+
+.aviso {
+    background: #fff3bf;
+    color: #665300;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+/* MENU */
+
+.menu {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-top: 1px solid #dde4df;
+    display: flex;
+    justify-content: space-around;
+    padding: 9px 5px;
+}
+
+.menu button {
+    border: none;
+    background: transparent;
+    color: #718078;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.menu button span {
+    display: block;
+    font-size: 21px;
+    margin-bottom: 3px;
+}
+
+.menu button.ativo {
+    color: #126b4a;
+}
+
+/* CELULAR */
+
+@media(max-width: 450px) {
+
+    .saldo h2 {
+        font-size: 29px;
+    }
+
+    .acao {
+        font-size: 11px;
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-    <!-- LOGIN -->
-    <section id="entrada">
-        <div class="login">
-            <div class="logo">A</div>
-            <h1>Banco Arandu</h1>
-            <p>Conta bancária demonstrativa</p>
-
-            <button id="botaoEntrar" class="entrar" type="button">
-                Entrar na conta demonstrativa
-            </button>
-        </div>
-    </section>
+<div class="app">
 
 
-    <!-- APLICATIVO -->
-    <div id="appPrincipal">
+<!-- =========================
+     TELA DE ENTRADA
+========================= -->
 
-        <header>
-            <div class="usuario">
-                <div class="avatar">U</div>
+<section id="entrada">
 
-                <div>
-                    <small>Olá,</small>
-                    <strong>Usuário</strong>
-                </div>
-            </div>
+    <div class="logo-grande">
 
-            <div class="topo-direita">
-                <button id="botaoNotificacoes" class="topo-btn" type="button">
-                    🔔
-                    <span id="badge" class="badge">0</span>
-                </button>
-
-                <button id="botaoSair" class="topo-btn" type="button">
-                    ↪
-                </button>
-            </div>
-        </header>
-
-
-        <!-- NOTIFICAÇÕES -->
-        <div id="notificacoes" class="notificacoes">
-            <h3>Notificações</h3>
-
-            <div id="listaNotificacoes">
-                <p>Nenhuma operação recente.</p>
-            </div>
+        <div class="icone">
+            A
         </div>
 
+        <h1>Banco Arandu</h1>
 
-        <main class="conteudo">
+        <p>
+            Uma experiência bancária demonstrativa
+        </p>
 
-            <!-- INÍCIO -->
-            <section id="inicio" class="tela ativa">
+    </div>
 
-                <div class="saldo-card">
-                    <small>Saldo disponível</small>
-                    <div id="saldo" class="saldo">R$ 2.500,00</div>
-                </div>
+    <button
+        class="entrar"
+        onclick="entrar()">
 
-                <div class="acoes">
+        Entrar na conta demonstrativa
 
-                    <button id="botaoDepositar" class="acao" type="button">
-                        <span>＋</span>
-                        Depositar
-                    </button>
+    </button>
 
-                    <button id="botaoEnviarPix" class="acao" type="button">
-                        <span>⚡</span>
-                        Enviar Pix
-                    </button>
+</section>
 
-                    <button id="botaoReceberPix" class="acao" type="button">
-                        <span>⇩</span>
-                        Receber Pix
-                    </button>
 
-                </div>
-            </section>
+<!-- =========================
+     APLICATIVO
+========================= -->
 
+<section id="appPrincipal">
 
-            <!-- ENVIAR PIX -->
-            <section id="pixEnviarTela" class="tela">
 
-                <div class="card">
+<header class="topo">
 
-                    <h2>Enviar Pix</h2>
+    <div class="usuario">
 
-                    <label>Chave Pix</label>
-                    <input
-                        id="chavePixDestino"
-                        class="campo"
-                        type="text"
-                        placeholder="Digite a chave Pix"
-                    >
+        <div class="avatar">
+            LA
+        </div>
 
-                    <label>Nome de quem vai receber</label>
-                    <input
-                        id="nomePixDestino"
-                        class="campo"
-                        type="text"
-                        placeholder="Nome do destinatário"
-                    >
+        <div>
 
-                    <label>Valor</label>
-                    <input
-                        id="valorPixEnvio"
-                        class="campo"
-                        type="text"
-                        inputmode="decimal"
-                        placeholder="R$ 0,00"
-                    >
+            <small>
+                Olá,
+            </small>
 
-                    <button id="botaoEnviarPixConfirmar" class="botao" type="button">
-                        Enviar Pix
-                    </button>
+            <strong>
+                Lucas
+            </strong>
 
-                    <div id="comprovanteEnvio" class="sucesso">
-                        <div id="dadosComprovante"></div>
-                    </div>
-
-                    <button id="botaoVoltarEnviar" class="botao voltar" type="button">
-                        Voltar
-                    </button>
-
-                </div>
-            </section>
-
-
-            <!-- RECEBER PIX -->
-            <section id="pixReceberTela" class="tela">
-
-                <div class="card">
-
-                    <h2>Receber Pix</h2>
-
-                    <p>Sua chave Pix demonstrativa:</p>
-
-                    <div id="minhaChave" class="chave">
-                        usuario@arandu.demo
-                    </div>
-
-                    <button id="botaoCopiarChave" class="botao" type="button">
-                        Copiar chave
-                    </button>
-
-                    <div class="qr"></div>
-
-                    <label>Quem te mandou o dinheiro?</label>
-                    <input
-                        id="nomeRemetente"
-                        class="campo"
-                        type="text"
-                        placeholder="Nome do remetente"
-                    >
-
-                    <label>Valor</label>
-                    <input
-                        id="valorPixRecebimento"
-                        class="campo"
-                        type="text"
-                        inputmode="decimal"
-                        placeholder="R$ 0,00"
-                    >
-
-                    <button id="botaoReceberPixConfirmar" class="botao" type="button">
-                        Simular recebimento
-                    </button>
-
-                    <div id="mensagemRecebimento" class="sucesso">
-                        <div id="textoRecebimento"></div>
-                    </div>
-
-                    <button id="botaoVoltarReceber" class="botao voltar" type="button">
-                        Voltar
-                    </button>
-
-                </div>
-            </section>
-
-
-            <!-- EXTRATO -->
-            <section id="extratoTela" class="tela">
-
-                <div class="card">
-
-                    <h2>Extrato</h2>
-
-                    <div id="listaExtrato">
-
-                        <div class="movimento">
-                            <div>
-                                <strong>Saldo inicial</strong>
-                                <div class="data">Conta demonstrativa</div>
-                            </div>
-
-                            <strong class="entrada">
-                                + R$ 2.500,00
-                            </strong>
-                        </div>
-
-                    </div>
-
-                </div>
-            </section>
-
-
-            <!-- CARTÃO -->
-            <section id="cartaoTela" class="tela">
-
-                <div class="card">
-                    <h2>Cartão</h2>
-
-                    <div class="cartao">
-                        <strong>Banco Arandu</strong>
-
-                        <div class="cartao-numero">
-                            •••• •••• •••• 2026
-                        </div>
-
-                        <div>
-                            <small>USUÁRIO</small>
-                        </div>
-                    </div>
-
-                    <div class="aviso">
-                        Este cartão é fictício e não possui função de pagamento real.
-                    </div>
-                </div>
-
-            </section>
-
-
-            <!-- AJUSTES -->
-            <section id="ajustesTela" class="tela">
-
-                <div class="card">
-
-                    <h2>Ajustes</h2>
-
-                    <button id="botaoModoEscuro" class="botao" type="button">
-                        Alternar modo escuro
-                    </button>
-
-                    <div class="aviso">
-                        Banco Arandu é uma demonstração fictícia.
-                        Não coloque informações bancárias reais neste site.
-                    </div>
-
-                </div>
-
-            </section>
-
-        </main>
-
-
-        <!-- MENU INFERIOR -->
-        <nav>
-
-            <button id="navInicio" class="ativo" type="button">
-                🏠<br>
-                Início
-            </button>
-
-            <button id="navExtrato" type="button">
-                📄<br>
-                Extrato
-            </button>
-
-            <button id="navCartao" type="button">
-                💳<br>
-                Cartão
-            </button>
-
-            <button id="navAjustes" type="button">
-                ⚙️<br>
-                Ajustes
-            </button>
-
-        </nav>
+        </div>
 
     </div>
 
 
-    <script>
+    <button
+        class="sair"
+        onclick="sair()">
 
-        /* =========================
-           DADOS DA CONTA
-        ========================= */
+        ↪
 
-        let saldo = 2500;
-        let quantidadeNotificacoes = 0;
+    </button>
 
-
-        /* =========================
-           ELEMENTOS
-        ========================= */
-
-        const entrada = document.getElementById("entrada");
-        const appPrincipal = document.getElementById("appPrincipal");
+</header>
 
 
-        /* =========================
-           ENTRAR
-        ========================= */
-
-        document
-            .getElementById("botaoEntrar")
-            .addEventListener("click", function () {
-
-                entrada.style.display = "none";
-                appPrincipal.style.display = "block";
-
-            });
+<main class="conteudo">
 
 
-        /* =========================
-           SAIR
-        ========================= */
+<!-- =========================
+     INÍCIO
+========================= -->
 
-        document
-            .getElementById("botaoSair")
-            .addEventListener("click", function () {
+<section
+    id="inicio"
+    class="tela ativa">
 
-                appPrincipal.style.display = "none";
-                entrada.style.display = "flex";
-
-            });
-
-
-        /* =========================
-           ABRIR TELAS
-        ========================= */
-
-        function abrirTela(id) {
-
-            const telas = document.querySelectorAll(".tela");
-
-            telas.forEach(function (tela) {
-                tela.classList.remove("ativa");
-            });
-
-            document
-                .getElementById(id)
-                .classList.add("ativa");
-
-            document
-                .getElementById("notificacoes")
-                .style.display = "none";
-        }
+    <h2>
+        Visão geral
+    </h2>
 
 
-        /* =========================
-           MENU
-        ========================= */
+    <div class="saldo">
 
-        document
-            .getElementById("navInicio")
-            .addEventListener("click", function () {
+        <small>
+            Saldo disponível
+        </small>
 
-                abrirTela("inicio");
-                atualizarMenu("navInicio");
+        <h2 id="saldo">
+            R$ 2.500,00
+        </h2>
 
-            });
-
-
-        document
-            .getElementById("navExtrato")
-            .addEventListener("click", function () {
-
-                abrirTela("extratoTela");
-                atualizarMenu("navExtrato");
-
-            });
+    </div>
 
 
-        document
-            .getElementById("navCartao")
-            .addEventListener("click", function () {
+    <div class="acoes">
 
-                abrirTela("cartaoTela");
-                atualizarMenu("navCartao");
+        <button
+            class="acao"
+            onclick="depositar()">
 
-            });
+            <span>＋</span>
 
+            Depositar
 
-        document
-            .getElementById("navAjustes")
-            .addEventListener("click", function () {
-
-                abrirTela("ajustesTela");
-                atualizarMenu("navAjustes");
-
-            });
+        </button>
 
 
-        function atualizarMenu(idAtivo) {
+        <button
+            class="acao"
+            onclick="transferir()">
 
-            const botoes = document.querySelectorAll("nav button");
+            <span>↗</span>
 
-            botoes.forEach(function (botao) {
-                botao.classList.remove("ativo");
-            });
+            Transferir
 
-            document
-                .getElementById(idAtivo)
-                .classList.add("ativo");
-        }
+        </button>
 
 
-        /* ========
+        <button
+            class="acao"
+            onclick="pagar()">
+
+            <span>▣</span>
+
+            Pagar
+
+        </button>
+
+    </div>
+
+
+    <section class="card">
+
+        <h3>
+            Últimas movimentações
+        </h3>
+
+        <div id="resumoExtrato">
+
+            <div class="movimento">
+
+                <div class="mov-icon entrada">
+                    ＋
+                </div>
+
+                <div class="mov-info">
+
+                    <strong>
+                        Depósito
+                    </strong>
+
+                    <small>
+                        Hoje
+                    </small>
+
+                </div>
+
+                <strong class="positivo">
+                    + R$ 500,00
+                </strong>
+
+            </div>
+
+
+            <div class="movimento">
+
+                <div class="mov-icon saida">
+                    −
+                </div>
+
+                <div class="mov-info">
+
+                    <strong>
+                        Compra simulada
+                    </strong>
+
+                    <small>
+                        Ontem
+                    </small>
+
+                </div>
+
+                <strong class="negativo">
+                    - R$ 75,00
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+<!-- =========================
+     EXTRATO
+========================= -->
+
+<section
+    id="extratoTela"
+    class="tela">
+
+    <h2>
+        Extrato
+    </h2>
+
+    <section class="card">
+
+        <h3>
+            Todas as movimentações
+        </h3>
+
+        <div id="extrato">
+
+            <div class="movimento">
+
+                <div class="mov-icon entrada">
+                    ＋
+                </div>
+
+                <div class="mov-info">
+
+                    <strong>
+                        Depósito
+                    </strong>
+
+                    <small>
+                        Hoje
+                    </small>
+
+                </div>
+
+                <strong class="positivo">
+                    + R$ 500,00
+                </strong>
+
+            </div>
+
+
+            <div class="movimento">
+
+                <div class="mov-icon saida">
+                    −
+                </div>
+
+                <div class="mov-info">
+
+                    <strong>
+                        Compra simulada
+                    </strong>
+
+                    <small>
+                        Ontem
+                    </small>
+
+                </div>
+
+                <strong class="negativo">
+                    - R$ 75,00
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+<!-- =========================
+     CARTÃO
+========================= -->
+
+<section
+    id="cartaoTela"
+    class="tela">
+
+    <h2>
+        Meu cartão
+    </h2>
+
+
+    <section class="card">
+
+        <div class="cartao">
+
+            <div class="cartao-topo">
+
+                <strong>
+                    BANCO ARANDU
+                </strong>
+
+                <span>
+                    💳
+                </span>
+
+            </div>
+
+
+            <div class="numero">
+                •••• •••• •••• 2026
+            </div>
+
+
+            <small>
+                CARTÃO FICTÍCIO
+            </small>
+
+        </div>
+
+        <br>
+
+        <p>
+            Cartão demonstrativo
+        </p>
+
+        <small>
+            Este cartão não possui função de pagamento real.
+        </small>
+
+    </section>
+
+</section>
+
+
+<!-- =========================
+     AJUSTES
+========================= -->
+
+<section
+    id="ajustesTela"
+    class="tela">
+
+    <h2>
+        Ajustes
+    </h2>
+
+
+    <div class="config-item">
+
+        <span>
+            🌙 Modo escuro
+        </span>
+
+        <button
+            onclick="modoEscuro()">
+
+            Alterar
+
+        </button>
+
+    </div>
+
+
+    <div class="config-item">
+
+        <span>
+            👤 Perfil demonstrativo
+        </span>
+
+        <button
+            onclick="alert('Perfil fictício do Banco Arandu')">
+
+            Ver
+
+        </button>
+
+    </div>
+
+
+    <div class="config-item">
+
+        <span>
+            ℹ️ Sobre o Arandu
+        </span>
+
+        <button
+            onclick="alert('Banco Arandu — sistema demonstrativo')">
+
+            Ver
+
+        </button>
+
+    </div>
+
+
+    <div class="aviso">
+
+        ⚠️ Este site é apenas uma demonstração.
+        Não insira senhas, CPF, cartões ou outros
+        dados bancários reais.
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     MENU INFERIOR
+========================= -->
+
+<nav class="menu">
+
+    <button
+        id="menuInicio"
+        class="ativo"
+        onclick="abrirTela('inicio', this)">
+
+        <span>⌂</span>
+
+        Início
+
+    </button>
+
+
+    <button
+        onclick="abrirTela('extratoTela', this)">
+
+        <span>▤</span>
+
+        Extrato
+
+    </button>
+
+
+    <button
+        onclick="abrirTela('cartaoTela', this)">
+
+        <span>▣</span>
+
+        Cartão
+
+    </button>
+
+
+    <button
+        onclick="abrirTela('ajustesTela', this)">
+
+        <span>⚙</span>
+
+        Ajustes
+
+    </button>
+
+</nav>
+
+
+</section>
+
+</div>
+
+
+<script>
+
+let saldo = 2500;
+
+
+/* =========================
+   ENTRAR
+========================= */
+
+function entrar() {
+
+    document.getElementById("entrada").style.display = "none";
+
+    document.getElementById("appPrincipal").style.display = "block";
+
+}
+
+
+/* =========================
+   SAIR
+========================= */
+
+function sair() {
+
+    document.getElementById("appPrincipal").style.display = "none";
+
+    document.getElementById("entrada").style.display = "flex";
+
+}
+
+
+/* =========================
+   ABRIR TELA
+========================= */
+
+function abrirTela(id, botao) {
+
+    const telas =
+        document.querySelectorAll(".tela");
+
+    telas.forEach(function(tela) {
+
+        tela.classList.remove("ativa");
+
+    });
+
+
+    document
+        .getElementById(id)
+        .classList.add("ativa");
+
+
+    const botoes =
+        document.querySelectorAll(".menu button");
+
+    botoes.forEach(function(btn) {
+
+        btn.classList.remove("ativo");
+
+    });
+
+
+    botao.classList.add("ativo");
+
+}
+
+
+/* =========================
+   SALDO
+========================= */
+
+function atualizarSaldo() {
+
+    document
+        .getElementById("saldo")
+        .textContent =
+        saldo.toLocaleString(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL"
+            }
+        );
+
+}
+
+
+/* =========================
+   ADICIONAR MOVIMENTO
+========================= */
+
+function adicionarMovimento(
+    nome,
+    valor,
+    entrada
+) {
+
+    const extrato =
+        document.getElementById("extrato");
+
+
+    const resumo =
+        document.getElementById("resumoExtrato");
+
+
+    const movimento =
+        document.createElement("div");
+
+
+    movimento.className =
+        "movimento";
+
+
+    const classe =
+        entrada
+        ? "entrada"
+        : "saida";
+
+
+    const cor =
+        entrada
+        ? "positivo"
+        : "negativo";
+
+
+    const simbolo =
+        entrada
+        ? "+"
+        : "−";
+
+
+    const sinal =
+        entrada
+        ? "+"
+        : "-";
+
+
+    movimento.innerHTML = `
+
+        <div class="mov-icon ${classe}">
+            ${simbolo}
+        </div>
+
+        <div class="mov-info">
+
+            <strong>
+                ${nome}
+            </strong>
+
+            <small>
+                Agora
+            </small>
+
+        </div>
+
+        <strong class="${cor}">
+            ${sinal} R$
+            ${valor
+                .toFixed(2)
+                .replace(".", ",")}
+        </strong>
+
+    `;
+
+
+    extrato.prepend(
+        movimento.cloneNode(true)
+    );
+
+
+    resumo.prepend(
+        movimento
+    );
+
+}
+
+
+/* =========================
+   DEPOSITAR
+========================= */
+
+function depositar() {
+
+    const valor =
+        Number(
+            prompt(
+                "Digite um valor fictício para depositar:"
+            )
+        );
+
+
+    if (
+        !valor ||
+        valor <= 0
+    ) {
+
+        alert(
+            "Digite um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    saldo += valor;
+
+
+    adicionarMovimento(
+        "Depósito simulado",
+        valor,
+        true
+    );
+
+
+    atualizarSaldo();
+
+}
+
+
+/* =========================
+   TRANSFERIR
+========================= */
+
+function transferir() {
+
+    const valor =
+        Number(
+            prompt(
+                "Digite um valor fictício para transferir:"
+            )
+        );
+
+
+    if (
+        !valor ||
+        valor <= 0
+    ) {
+
+        alert(
+            "Digite um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    if (valor > saldo) {
+
+        alert(
+            "Saldo insuficiente."
+        );
+
+        return;
+
+    }
+
+
+    saldo -= valor;
+
+
+    adicionarMovimento(
+        "Transferência simulada",
+        valor,
+        false
+    );
+
+
+    atualizarSaldo();
+
+}
+
+
+/* =========================
+   PAGAR
+========================= */
+
+function pagar() {
+
+    const valor =
+        Number(
+            prompt(
+                "Digite um valor fictício para pagar:"
+            )
+        );
+
+
+    if (
+        !valor ||
+        valor <= 0
+    ) {
+
+        alert(
+            "Digite um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    if (valor > saldo) {
+
+        alert(
+            "Saldo insuficiente."
+        );
+
+        return;
+
+    }
+
+
+    saldo -= valor;
+
+
+    adicionarMovimento(
+        "Pagamento simulado",
+        valor,
+        false
+    );
+
+
+    atualizarSaldo();
+
+}
+
+
+/* =========================
+   MODO ESCURO
+========================= */
+
+function modoEscuro() {
+
+    document.body.classList.toggle("escuro");
+
+
+    if (
+        document.body.classList.contains("escuro")
+    ) {
+
+        document.body.style.background =
+            "#101615";
+
+        document.querySelector(".app").style.background =
+            "#101615";
+
+    } else {
+
+        document.body.style.background =
+            "#eef3f0";
+
+        document.querySelector(".app").style.background =
+            "#eef3f0";
+
+    }
+
+}
+
+
+atualizarSaldo();
+
+</script>
+
+</body>
+
+    </html>
