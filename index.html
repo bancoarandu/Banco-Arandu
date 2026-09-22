@@ -1,498 +1,624 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="theme-color" content="#126b4a">
 <title>Banco Arandu</title>
 
 <style>
+*{box-sizing:border-box}
 
-* {
-    box-sizing: border-box;
+:root{
+    --verde:#126b4a;
+    --verde2:#08442f;
+    --fundo:#eef3f0;
+    --card:#fff;
+    --texto:#17201d;
+    --cinza:#718078;
+    --borda:#dde4df;
+    --vermelho:#c43d35;
+    --amarelo:#fff3bf;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #eef3f0;
-    color: #17201d;
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:var(--fundo);
+    color:var(--texto);
+    transition:.25s;
 }
 
-.app {
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-    min-height: 100vh;
-    padding-bottom: 85px;
+button,input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.app{
+    width:100%;
+    max-width:600px;
+    margin:auto;
+    min-height:100vh;
+    padding-bottom:82px;
 }
 
 /* ENTRADA */
 
-#entrada {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 30px;
+#entrada{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:30px;
 }
 
-.logo-grande {
-    text-align: center;
-    margin-bottom: 40px;
+.logo-grande{
+    text-align:center;
+    margin-bottom:40px;
 }
 
-.icone {
-    width: 75px;
-    height: 75px;
-    margin: auto;
-    background: #126b4a;
-    color: white;
-    border-radius: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    font-weight: bold;
+.icone{
+    width:78px;
+    height:78px;
+    margin:auto;
+    background:var(--verde);
+    color:#fff;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    font-weight:bold;
 }
 
-.logo-grande h1 {
-    color: #126b4a;
-    margin-bottom: 5px;
+.logo-grande h1{
+    color:var(--verde);
+    margin-bottom:5px;
 }
 
-.logo-grande p {
-    color: #718078;
+.logo-grande p{
+    color:var(--cinza);
 }
 
-.entrar {
-    width: 100%;
-    padding: 17px;
-    border: none;
-    border-radius: 12px;
-    background: #126b4a;
-    color: white;
-    font-size: 17px;
-    cursor: pointer;
+.entrar{
+    width:100%;
+    padding:17px;
+    border:0;
+    border-radius:12px;
+    background:var(--verde);
+    color:#fff;
+    font-size:17px;
 }
 
-/* APLICATIVO */
+/* APP */
 
-#appPrincipal {
-    display: none;
+#appPrincipal{
+    display:none;
 }
 
-.topo {
-    padding: 25px 20px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.topo{
+    padding:25px 20px 10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.usuario {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.usuario{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: #126b4a;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+.avatar{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:var(--verde);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
 }
 
-.usuario small {
-    color: #718078;
+.usuario small{
+    color:var(--cinza);
 }
 
-.usuario strong {
-    display: block;
-    margin-top: 3px;
+.usuario strong{
+    display:block;
+    margin-top:3px;
 }
 
-.sair {
-    border: none;
-    background: white;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
+.topo-acoes{
+    display:flex;
+    gap:7px;
 }
 
-.conteudo {
-    padding: 10px 20px;
+.topo-btn{
+    border:0;
+    background:var(--card);
+    padding:10px;
+    border-radius:10px;
 }
 
-/* TELAS */
-
-.tela {
-    display: none;
+.conteudo{
+    padding:10px 20px;
 }
 
-.tela.ativa {
-    display: block;
+.tela{
+    display:none;
+}
+
+.tela.ativa{
+    display:block;
 }
 
 /* SALDO */
 
-.saldo {
-    background: linear-gradient(135deg, #126b4a, #08442f);
-    color: white;
-    border-radius: 22px;
-    padding: 25px;
-    margin: 15px 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+.saldo{
+    background:linear-gradient(135deg,var(--verde),var(--verde2));
+    color:#fff;
+    border-radius:22px;
+    padding:25px;
+    margin:15px 0;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
 }
 
-.saldo small {
-    opacity: .8;
+.saldo small{
+    opacity:.8;
 }
 
-.saldo h2 {
-    font-size: 32px;
-    margin: 10px 0 0;
+.saldo h2{
+    font-size:32px;
+    margin:10px 0 0;
+}
+
+.saldo-linha{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.olho{
+    border:0;
+    background:rgba(255,255,255,.15);
+    color:white;
+    border-radius:10px;
+    padding:8px 11px;
 }
 
 /* AÇÕES */
 
-.acoes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px 0;
+.acoes{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:9px;
+    margin:20px 0;
 }
 
-.acao {
-    border: none;
-    background: white;
-    border-radius: 15px;
-    padding: 16px 5px;
-    cursor: pointer;
-    color: #17201d;
+.acao{
+    border:0;
+    background:var(--card);
+    border-radius:15px;
+    padding:14px 4px;
+    color:var(--texto);
 }
 
-.acao span {
-    display: block;
-    color: #126b4a;
-    font-size: 23px;
-    margin-bottom: 6px;
+.acao span{
+    display:block;
+    color:var(--verde);
+    font-size:22px;
+    margin-bottom:6px;
 }
 
 /* CARDS */
 
-.card {
-    background: white;
-    border-radius: 18px;
-    padding: 20px;
-    margin-bottom: 18px;
+.card{
+    background:var(--card);
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:18px;
 }
 
-.card h3 {
-    margin-top: 0;
+.card h3{
+    margin-top:0;
+}
+
+/* MOVIMENTAÇÕES */
+
+.movimento{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:13px 0;
+    border-bottom:1px solid var(--borda);
+}
+
+.movimento:last-child{
+    border-bottom:0;
+}
+
+.mov-icon{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.entrada{
+    background:#dff4e8;
+    color:#16834f;
+}
+
+.saida{
+    background:#ffe3e3;
+    color:#c43d35;
+}
+
+.mov-info{
+    flex:1;
+    min-width:0;
+}
+
+.mov-info strong{
+    display:block;
+}
+
+.mov-info small{
+    color:var(--cinza);
+}
+
+.positivo{
+    color:#16834f;
+}
+
+.negativo{
+    color:#c43d35;
 }
 
 /* EXTRATO */
 
-.movimento {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 13px 0;
-    border-bottom: 1px solid #e5ebe7;
+.busca{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--borda);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--texto);
+    outline:none;
+    margin-bottom:12px;
 }
 
-.movimento:last-child {
-    border-bottom: none;
+.filtros{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    margin-bottom:15px;
 }
 
-.mov-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.filtro{
+    border:1px solid var(--borda);
+    background:var(--card);
+    color:var(--texto);
+    border-radius:20px;
+    padding:8px 13px;
+    white-space:nowrap;
 }
 
-.entrada {
-    background: #dff4e8;
-    color: #16834f;
-}
-
-.saida {
-    background: #ffe3e3;
-    color: #c43d35;
-}
-
-.mov-info {
-    flex: 1;
-}
-
-.mov-info strong {
-    display: block;
-}
-
-.mov-info small {
-    color: #718078;
-}
-
-.positivo {
-    color: #16834f;
-}
-
-.negativo {
-    color: #c43d35;
+.filtro.ativo{
+    background:var(--verde);
+    color:#fff;
+    border-color:var(--verde);
 }
 
 /* CARTÃO */
 
-.cartao {
-    height: 180px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #202d29, #0b1210);
-    color: white;
-    padding: 22px;
+.cartao{
+    height:185px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#202d29,#0b1210);
+    color:#fff;
+    padding:22px;
 }
 
-.cartao-topo {
-    display: flex;
-    justify-content: space-between;
+.cartao-topo{
+    display:flex;
+    justify-content:space-between;
 }
 
-.numero {
-    margin-top: 50px;
-    letter-spacing: 3px;
-    font-size: 18px;
+.numero{
+    margin-top:50px;
+    letter-spacing:3px;
+    font-size:18px;
 }
 
-/* AJUSTES */
-
-.config-item {
-    background: white;
-    padding: 18px;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.cartao-bloqueado{
+    opacity:.55;
 }
 
-.config-item button {
-    border: none;
-    background: #126b4a;
-    color: white;
-    padding: 9px 13px;
-    border-radius: 9px;
-    cursor: pointer;
+.cartao-acoes{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
 }
 
-/* AVISO */
+.botao-sec{
+    width:100%;
+    border:0;
+    padding:13px;
+    border-radius:11px;
+    background:#e6eee9;
+    color:var(--texto);
+}
 
-.aviso {
-    background: #fff3bf;
-    color: #665300;
-    padding: 14px;
-    border-radius: 12px;
-    font-size: 12px;
-    margin-top: 15px;
+.botao-verde{
+    width:100%;
+    border:0;
+    padding:13px;
+    border-radius:11px;
+    background:var(--verde);
+    color:#fff;
+}
+
+/* CONFIGURAÇÕES */
+
+.config-item{
+    background:var(--card);
+    padding:17px;
+    border-radius:15px;
+    margin-bottom:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.config-item button{
+    border:0;
+    background:var(--verde);
+    color:#fff;
+    padding:9px 13px;
+    border-radius:9px;
+}
+
+.aviso{
+    background:var(--amarelo);
+    color:#665300;
+    padding:14px;
+    border-radius:12px;
+    font-size:12px;
+    margin-top:15px;
 }
 
 /* MENU */
 
-.menu {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 600px;
-    background: white;
-    border-top: 1px solid #dde4df;
-    display: flex;
-    justify-content: space-around;
-    padding: 9px 5px;
+.menu{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    background:var(--card);
+    border-top:1px solid var(--borda);
+    display:flex;
+    justify-content:space-around;
+    padding:9px 5px;
+    z-index:20;
 }
 
-.menu button {
-    border: none;
-    background: transparent;
-    color: #718078;
-    font-size: 11px;
-    cursor: pointer;
+.menu button{
+    border:0;
+    background:transparent;
+    color:var(--cinza);
+    font-size:11px;
 }
 
-.menu button span {
-    display: block;
-    font-size: 21px;
-    margin-bottom: 3px;
+.menu button span{
+    display:block;
+    font-size:21px;
+    margin-bottom:3px;
 }
 
-.menu button.ativo {
-    color: #126b4a;
+.menu button.ativo{
+    color:var(--verde);
 }
 
-/* CELULAR */
+/* MODAL */
 
-@media(max-width: 450px) {
-
-    .saldo h2 {
-        font-size: 29px;
-    }
-
-    .acao {
-        font-size: 11px;
-    }
-
+.modal-fundo{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.48);
+    z-index:100;
+    align-items:flex-end;
+    justify-content:center;
 }
 
+.modal-fundo.aberto{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:600px;
+    background:var(--card);
+    color:var(--texto);
+    border-radius:22px 22px 0 0;
+    padding:22px;
+    animation:subir .2s ease;
+}
+
+@keyframes subir{
+    from{transform:translateY(100%)}
+    to{transform:translateY(0)}
+}
+
+.modal h3{
+    margin-top:0;
+}
+
+.modal input{
+    width:100%;
+    padding:15px;
+    border:1px solid var(--borda);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--texto);
+    outline:none;
+    margin:10px 0;
+}
+
+.modal-botoes{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:8px;
+}
+
+/* NOTIFICAÇÕES */
+
+.notificacao{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%) translateY(-130px);
+    width:calc(100% - 30px);
+    max-width:570px;
+    background:var(--card);
+    border-radius:14px;
+    padding:14px 16px;
+    box-shadow:0 8px 25px rgba(0,0,0,.18);
+    z-index:200;
+    transition:.3s;
+}
+
+.notificacao.mostrar{
+    transform:translateX(-50%) translateY(0);
+}
+
+.vazio{
+    text-align:center;
+    color:var(--cinza);
+    padding:25px 5px;
+}
+
+/* ESCURO */
+
+body.escuro{
+    --fundo:#101615;
+    --card:#18201e;
+    --texto:#edf4f0;
+    --cinza:#9baaa3;
+    --borda:#2a3531;
+    --amarelo:#403a1d;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:450px){
+    .saldo h2{font-size:29px}
+    .acao{font-size:10px}
+    .cartao-acoes{grid-template-columns:1fr}
+}
 </style>
 </head>
-
 
 <body>
 
 <div class="app">
 
-
-<!-- =========================
-     TELA DE ENTRADA
-========================= -->
+<!-- ENTRADA -->
 
 <section id="entrada">
 
     <div class="logo-grande">
-
-        <div class="icone">
-            A
-        </div>
-
+        <div class="icone">A</div>
         <h1>Banco Arandu</h1>
-
-        <p>
-            Uma experiência bancária demonstrativa
-        </p>
-
+        <p>Uma experiência bancária demonstrativa</p>
     </div>
 
-    <button
-        class="entrar"
-        onclick="entrar()">
-
+    <button class="entrar" onclick="entrar()">
         Entrar na conta demonstrativa
-
     </button>
 
 </section>
 
 
-<!-- =========================
-     APLICATIVO
-========================= -->
+<!-- APLICATIVO -->
 
 <section id="appPrincipal">
-
 
 <header class="topo">
 
     <div class="usuario">
-
-        <div class="avatar">
-            LA
-        </div>
-
+        <div class="avatar">LA</div>
         <div>
-
-            <small>
-                Olá,
-            </small>
-
-            <strong>
-                Lucas
-            </strong>
-
+            <small>Olá,</small>
+            <strong>Lucas</strong>
         </div>
-
     </div>
 
-
-    <button
-        class="sair"
-        onclick="sair()">
-
-        ↪
-
-    </button>
+    <div class="topo-acoes">
+        <button class="topo-btn" onclick="mostrarNotificacao('Você não possui novas notificações.')">🔔</button>
+        <button class="topo-btn" onclick="sair()">↪</button>
+    </div>
 
 </header>
 
 
 <main class="conteudo">
 
+<!-- INÍCIO -->
 
-<!-- =========================
-     INÍCIO
-========================= -->
+<section id="inicio" class="tela ativa">
 
-<section
-    id="inicio"
-    class="tela ativa">
-
-    <h2>
-        Visão geral
-    </h2>
-
+    <h2>Visão geral</h2>
 
     <div class="saldo">
 
-        <small>
-            Saldo disponível
-        </small>
+        <small>Saldo disponível</small>
 
-        <h2 id="saldo">
-            R$ 2.500,00
-        </h2>
+        <div class="saldo-linha">
+            <h2 id="saldo">R$ 2.500,00</h2>
+
+            <button class="olho" onclick="alternarSaldo()">
+                👁
+            </button>
+        </div>
 
     </div>
 
 
     <div class="acoes">
 
-        <button
-            class="acao"
-            onclick="depositar()">
-
+        <button class="acao" onclick="abrirOperacao('deposito')">
             <span>＋</span>
-
             Depositar
-
         </button>
 
+        <button class="acao" onclick="abrirOperacao('saque')">
+            <span>↓</span>
+            Sacar
+        </button>
 
-        <button
-            class="acao"
-            onclick="transferir()">
-
+        <button class="acao" onclick="abrirOperacao('transferencia')">
             <span>↗</span>
-
             Transferir
-
         </button>
 
-
-        <button
-            class="acao"
-            onclick="pagar()">
-
+        <button class="acao" onclick="abrirOperacao('pagamento')">
             <span>▣</span>
-
             Pagar
-
         </button>
 
     </div>
@@ -500,189 +626,102 @@ body {
 
     <section class="card">
 
-        <h3>
-            Últimas movimentações
-        </h3>
+        <h3>Últimas movimentações</h3>
 
-        <div id="resumoExtrato">
+        <div id="resumoExtrato"></div>
 
-            <div class="movimento">
-
-                <div class="mov-icon entrada">
-                    ＋
-                </div>
-
-                <div class="mov-info">
-
-                    <strong>
-                        Depósito
-                    </strong>
-
-                    <small>
-                        Hoje
-                    </small>
-
-                </div>
-
-                <strong class="positivo">
-                    + R$ 500,00
-                </strong>
-
-            </div>
+    </section>
 
 
-            <div class="movimento">
+    <section class="card">
 
-                <div class="mov-icon saida">
-                    −
-                </div>
+        <h3>Atalhos</h3>
 
-                <div class="mov-info">
-
-                    <strong>
-                        Compra simulada
-                    </strong>
-
-                    <small>
-                        Ontem
-                    </small>
-
-                </div>
-
-                <strong class="negativo">
-                    - R$ 75,00
-                </strong>
-
-            </div>
-
-        </div>
+        <button class="botao-verde" onclick="abrirTelaPorId('extratoTela',2)">
+            Ver extrato completo
+        </button>
 
     </section>
 
 </section>
 
 
-<!-- =========================
-     EXTRATO
-========================= -->
+<!-- EXTRATO -->
 
-<section
-    id="extratoTela"
-    class="tela">
+<section id="extratoTela" class="tela">
 
-    <h2>
-        Extrato
-    </h2>
+    <h2>Extrato</h2>
+
+    <input
+        id="buscaExtrato"
+        class="busca"
+        type="text"
+        placeholder="🔎 Procurar movimentação..."
+        oninput="renderizarExtrato()"
+    >
+
+    <div class="filtros">
+
+        <button class="filtro ativo" onclick="mudarFiltro('todos',this)">
+            Todos
+        </button>
+
+        <button class="filtro" onclick="mudarFiltro('entrada',this)">
+            Entradas
+        </button>
+
+        <button class="filtro" onclick="mudarFiltro('saida',this)">
+            Saídas
+        </button>
+
+    </div>
 
     <section class="card">
 
-        <h3>
-            Todas as movimentações
-        </h3>
-
-        <div id="extrato">
-
-            <div class="movimento">
-
-                <div class="mov-icon entrada">
-                    ＋
-                </div>
-
-                <div class="mov-info">
-
-                    <strong>
-                        Depósito
-                    </strong>
-
-                    <small>
-                        Hoje
-                    </small>
-
-                </div>
-
-                <strong class="positivo">
-                    + R$ 500,00
-                </strong>
-
-            </div>
-
-
-            <div class="movimento">
-
-                <div class="mov-icon saida">
-                    −
-                </div>
-
-                <div class="mov-info">
-
-                    <strong>
-                        Compra simulada
-                    </strong>
-
-                    <small>
-                        Ontem
-                    </small>
-
-                </div>
-
-                <strong class="negativo">
-                    - R$ 75,00
-                </strong>
-
-            </div>
-
-        </div>
+        <div id="extrato"></div>
 
     </section>
 
 </section>
 
 
-<!-- =========================
-     CARTÃO
-========================= -->
+<!-- CARTÃO -->
 
-<section
-    id="cartaoTela"
-    class="tela">
+<section id="cartaoTela" class="tela">
 
-    <h2>
-        Meu cartão
-    </h2>
-
+    <h2>Meu cartão</h2>
 
     <section class="card">
 
-        <div class="cartao">
+        <div id="cartaoVisual" class="cartao">
 
             <div class="cartao-topo">
-
-                <strong>
-                    BANCO ARANDU
-                </strong>
-
-                <span>
-                    💳
-                </span>
-
+                <strong>BANCO ARANDU</strong>
+                <span>💳</span>
             </div>
-
 
             <div class="numero">
                 •••• •••• •••• 2026
             </div>
 
-
-            <small>
-                CARTÃO FICTÍCIO
-            </small>
+            <small>CARTÃO FICTÍCIO</small>
 
         </div>
 
-        <br>
+        <div class="cartao-acoes">
 
-        <p>
-            Cartão demonstrativo
+            <button class="botao-sec" onclick="alternarCartao()">
+                🔒 Bloquear / desbloquear
+            </button>
+
+            <button class="botao-sec" onclick="mostrarNotificacao('Cartão demonstrativo selecionado.')">
+                ⚙ Gerenciar cartão
+            </button>
+
+        </div>
+
+        <p id="statusCartao">
+            Cartão desbloqueado
         </p>
 
         <small>
@@ -694,500 +733,441 @@ body {
 </section>
 
 
-<!-- =========================
-     AJUSTES
-========================= -->
+<!-- AJUSTES -->
 
-<section
-    id="ajustesTela"
-    class="tela">
+<section id="ajustesTela" class="tela">
 
-    <h2>
-        Ajustes
-    </h2>
-
+    <h2>Ajustes</h2>
 
     <div class="config-item">
-
-        <span>
-            🌙 Modo escuro
-        </span>
-
-        <button
-            onclick="modoEscuro()">
-
-            Alterar
-
-        </button>
-
+        <span>🌙 Modo escuro</span>
+        <button onclick="modoEscuro()">Alterar</button>
     </div>
 
+    <div class="config-item">
+        <span>👤 Perfil demonstrativo</span>
+        <button onclick="mostrarPerfil()">Ver</button>
+    </div>
 
     <div class="config-item">
-
-        <span>
-            👤 Perfil demonstrativo
-        </span>
-
-        <button
-            onclick="alert('Perfil fictício do Banco Arandu')">
-
+        <span>🔔 Notificações</span>
+        <button onclick="mostrarNotificacao('Notificações demonstrativas ativadas.')">
             Ver
-
         </button>
-
     </div>
-
 
     <div class="config-item">
-
-        <span>
-            ℹ️ Sobre o Arandu
-        </span>
-
-        <button
-            onclick="alert('Banco Arandu — sistema demonstrativo')">
-
-            Ver
-
-        </button>
-
+        <span>🔄 Restaurar conta</span>
+        <button onclick="restaurarConta()">Resetar</button>
     </div>
 
+    <div class="config-item">
+        <span>ℹ️ Sobre o Arandu</span>
+        <button onclick="mostrarNotificacao('Banco Arandu — sistema demonstrativo.')">
+            Ver
+        </button>
+    </div>
 
     <div class="aviso">
-
         ⚠️ Este site é apenas uma demonstração.
         Não insira senhas, CPF, cartões ou outros
         dados bancários reais.
-
     </div>
 
 </section>
-
 
 </main>
 
 
-<!-- =========================
-     MENU INFERIOR
-========================= -->
+<!-- MENU -->
 
 <nav class="menu">
 
-    <button
-        id="menuInicio"
-        class="ativo"
-        onclick="abrirTela('inicio', this)">
-
+    <button id="menuInicio" class="ativo"
+        onclick="abrirTela('inicio',this)">
         <span>⌂</span>
-
         Início
-
     </button>
 
-
-    <button
-        onclick="abrirTela('extratoTela', this)">
-
+    <button onclick="abrirTela('extratoTela',this)">
         <span>▤</span>
-
         Extrato
-
     </button>
 
-
-    <button
-        onclick="abrirTela('cartaoTela', this)">
-
+    <button onclick="abrirTela('cartaoTela',this)">
         <span>▣</span>
-
         Cartão
-
     </button>
 
-
-    <button
-        onclick="abrirTela('ajustesTela', this)">
-
+    <button onclick="abrirTela('ajustesTela',this)">
         <span>⚙</span>
-
         Ajustes
-
     </button>
 
 </nav>
 
-
 </section>
+</div>
 
+
+<!-- MODAL DE OPERAÇÃO -->
+
+<div id="modalFundo" class="modal-fundo" onclick="fecharModalFora(event)">
+
+    <div class="modal">
+
+        <h3 id="modalTitulo">Operação</h3>
+
+        <p id="modalDescricao"></p>
+
+        <input
+            id="valorOperacao"
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="Digite o valor"
+        >
+
+        <input
+            id="destinatario"
+            type="text"
+            placeholder="Destinatário (opcional)"
+            style="display:none"
+        >
+
+        <div class="modal-botoes">
+
+            <button class="botao-sec" onclick="fecharModal()">
+                Cancelar
+            </button>
+
+            <button class="botao-verde" onclick="confirmarOperacao()">
+                Confirmar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="notificacao" class="notificacao">
+    <strong id="notificacaoTexto"></strong>
 </div>
 
 
 <script>
 
-let saldo = 2500;
+/* =====================================================
+   BANCO ARANDU — SISTEMA DEMONSTRATIVO
+   Tudo funciona localmente no navegador.
+===================================================== */
 
 
-/* =========================
+/* ESTADO */
+
+const SALDO_INICIAL = 2500;
+
+let saldo = Number(localStorage.getItem("arandu_saldo"));
+
+if(!Number.isFinite(saldo)){
+    saldo = SALDO_INICIAL;
+}
+
+let movimentos;
+
+try{
+    movimentos = JSON.parse(
+        localStorage.getItem("arandu_movimentos")
+    );
+}catch(e){
+    movimentos = null;
+}
+
+if(!Array.isArray(movimentos) || movimentos.length === 0){
+
+    movimentos = [
+        {
+            id:Date.now()-2,
+            nome:"Depósito inicial",
+            valor:500,
+            entrada:true,
+            data:"Hoje"
+        },
+        {
+            id:Date.now()-1,
+            nome:"Compra simulada",
+            valor:75,
+            entrada:false,
+            data:"Ontem"
+        }
+    ];
+
+    salvar();
+}
+
+let saldoOculto = false;
+let operacaoAtual = null;
+let filtroAtual = "todos";
+let cartaoBloqueado =
+    localStorage.getItem("arandu_cartao_bloqueado") === "true";
+
+
+/* =====================================================
+   PERSISTÊNCIA
+===================================================== */
+
+function salvar(){
+
+    localStorage.setItem(
+        "arandu_saldo",
+        String(saldo)
+    );
+
+    localStorage.setItem(
+        "arandu_movimentos",
+        JSON.stringify(movimentos)
+    );
+
+    localStorage.setItem(
+        "arandu_cartao_bloqueado",
+        String(cartaoBloqueado)
+    );
+}
+
+
+/* =====================================================
    ENTRAR
-========================= */
+===================================================== */
 
-function entrar() {
+function entrar(){
 
-    document.getElementById("entrada").style.display = "none";
+    document.getElementById("entrada").style.display="none";
 
-    document.getElementById("appPrincipal").style.display = "block";
+    document.getElementById("appPrincipal").style.display="block";
+
+    atualizarTudo();
 
 }
 
 
-/* =========================
+/* =====================================================
    SAIR
-========================= */
+===================================================== */
 
-function sair() {
+function sair(){
 
-    document.getElementById("appPrincipal").style.display = "none";
+    document.getElementById("appPrincipal").style.display="none";
 
-    document.getElementById("entrada").style.display = "flex";
+    document.getElementById("entrada").style.display="flex";
 
 }
 
 
-/* =========================
-   ABRIR TELA
-========================= */
+/* =====================================================
+   NAVEGAÇÃO
+===================================================== */
 
-function abrirTela(id, botao) {
+function abrirTela(id,botao){
 
-    const telas =
-        document.querySelectorAll(".tela");
-
-    telas.forEach(function(tela) {
-
+    document.querySelectorAll(".tela").forEach(function(tela){
         tela.classList.remove("ativa");
-
     });
 
+    const tela = document.getElementById(id);
 
-    document
-        .getElementById(id)
-        .classList.add("ativa");
+    if(!tela) return;
 
+    tela.classList.add("ativa");
+
+    document.querySelectorAll(".menu button").forEach(function(btn){
+        btn.classList.remove("ativo");
+    });
+
+    if(botao){
+        botao.classList.add("ativo");
+    }
+}
+
+
+function abrirTelaPorId(id,indice){
 
     const botoes =
         document.querySelectorAll(".menu button");
 
-    botoes.forEach(function(btn) {
-
-        btn.classList.remove("ativo");
-
-    });
-
-
-    botao.classList.add("ativo");
+    abrirTela(id,botoes[indice]);
 
 }
 
 
-/* =========================
+/* =====================================================
    SALDO
-========================= */
+===================================================== */
 
-function atualizarSaldo() {
+function formatar(valor){
+
+    return valor.toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
+
+}
+
+
+function atualizarSaldo(){
+
+    const elemento =
+        document.getElementById("saldo");
+
+    if(saldoOculto){
+
+        elemento.textContent = "R$ •••••";
+
+    }else{
+
+        elemento.textContent = formatar(saldo);
+
+    }
+
+}
+
+
+/* =====================================================
+   OCULTAR SALDO
+===================================================== */
+
+function alternarSaldo(){
+
+    saldoOculto = !saldoOculto;
+
+    atualizarSaldo();
+
+}
+
+
+/* =====================================================
+   OPERAÇÕES
+===================================================== */
+
+function abrirOperacao(tipo){
+
+    operacaoAtual = tipo;
+
+    const titulo =
+        document.getElementById("modalTitulo");
+
+    const descricao =
+        document.getElementById("modalDescricao");
+
+    const destinatario =
+        document.getElementById("destinatario");
+
+    const valor =
+        document.getElementById("valorOperacao");
+
+    valor.value = "";
+
+    destinatario.value = "";
+
+    destinatario.style.display =
+        tipo === "transferencia"
+        ? "block"
+        : "none";
+
+
+    if(tipo === "deposito"){
+
+        titulo.textContent = "Depositar";
+
+        descricao.textContent =
+            "Digite o valor que deseja adicionar à conta demonstrativa.";
+
+    }
+
+    if(tipo === "saque"){
+
+        titulo.textContent = "Sacar";
+
+        descricao.textContent =
+            "Digite o valor que deseja retirar da conta demonstrativa.";
+
+    }
+
+    if(tipo === "transferencia"){
+
+        titulo.textContent = "Transferir";
+
+        descricao.textContent =
+            "Informe o valor e, se quiser, um destinatário fictício.";
+
+    }
+
+    if(tipo === "pagamento"){
+
+        titulo.textContent = "Pagar";
+
+        descricao.textContent =
+            "Digite o valor do pagamento demonstrativo.";
+
+    }
+
 
     document
-        .getElementById("saldo")
-        .textContent =
-        saldo.toLocaleString(
-            "pt-BR",
-            {
-                style: "currency",
-                currency: "BRL"
-            }
-        );
+        .getElementById("modalFundo")
+        .classList.add("aberto");
+
+    setTimeout(function(){
+        valor.focus();
+    },100);
 
 }
 
 
-/* =========================
-   ADICIONAR MOVIMENTO
-========================= */
+function fecharModal(){
 
-function adicionarMovimento(
-    nome,
-    valor,
-    entrada
-) {
+    document
+        .getElementById("modalFundo")
+        .classList.remove("aberto");
 
-    const extrato =
-        document.getElementById("extrato");
-
-
-    const resumo =
-        document.getElementById("resumoExtrato");
-
-
-    const movimento =
-        document.createElement("div");
-
-
-    movimento.className =
-        "movimento";
-
-
-    const classe =
-        entrada
-        ? "entrada"
-        : "saida";
-
-
-    const cor =
-        entrada
-        ? "positivo"
-        : "negativo";
-
-
-    const simbolo =
-        entrada
-        ? "+"
-        : "−";
-
-
-    const sinal =
-        entrada
-        ? "+"
-        : "-";
-
-
-    movimento.innerHTML = `
-
-        <div class="mov-icon ${classe}">
-            ${simbolo}
-        </div>
-
-        <div class="mov-info">
-
-            <strong>
-                ${nome}
-            </strong>
-
-            <small>
-                Agora
-            </small>
-
-        </div>
-
-        <strong class="${cor}">
-            ${sinal} R$
-            ${valor
-                .toFixed(2)
-                .replace(".", ",")}
-        </strong>
-
-    `;
-
-
-    extrato.prepend(
-        movimento.cloneNode(true)
-    );
-
-
-    resumo.prepend(
-        movimento
-    );
+    operacaoAtual = null;
 
 }
 
 
-/* =========================
-   DEPOSITAR
-========================= */
+function fecharModalFora(event){
 
-function depositar() {
+    if(event.target.id === "modalFundo"){
+        fecharModal();
+    }
+
+}
+
+
+/* =====================================================
+   CONFIRMAR OPERAÇÃO
+===================================================== */
+
+function confirmarOperacao(){
+
+    const campo =
+        document.getElementById("valorOperacao");
 
     const valor =
-        Number(
-            prompt(
-                "Digite um valor fictício para depositar:"
-            )
-        );
+        Number(campo.value);
 
+    if(!Number.isFinite(valor) || valor <= 0){
 
-    if (
-        !valor ||
-        valor <= 0
-    ) {
-
-        alert(
+        mostrarNotificacao(
             "Digite um valor válido."
         );
 
         return;
-
     }
 
 
-    saldo += valor;
-
-
-    adicionarMovimento(
-        "Depósito simulado",
-        valor,
-        true
-    );
-
-
-    atualizarSaldo();
-
-}
-
-
-/* =========================
-   TRANSFERIR
-========================= */
-
-function transferir() {
-
-    const valor =
-        Number(
-            prompt(
-                "Digite um valor fictício para transferir:"
-            )
-        );
-
-
-    if (
-        !valor ||
-        valor <= 0
-    ) {
-
-        alert(
-            "Digite um valor válido."
-        );
-
-        return;
-
-    }
-
-
-    if (valor > saldo) {
-
-        alert(
-            "Saldo insuficiente."
-        );
-
-        return;
-
-    }
-
-
-    saldo -= valor;
-
-
-    adicionarMovimento(
-        "Transferência simulada",
-        valor,
-        false
-    );
-
-
-    atualizarSaldo();
-
-}
-
-
-/* =========================
-   PAGAR
-========================= */
-
-function pagar() {
-
-    const valor =
-        Number(
-            prompt(
-                "Digite um valor fictício para pagar:"
-            )
-        );
-
-
-    if (
-        !valor ||
-        valor <= 0
-    ) {
-
-        alert(
-            "Digite um valor válido."
-        );
-
-        return;
-
-    }
-
-
-    if (valor > saldo) {
-
-        alert(
-            "Saldo insuficiente."
-        );
-
-        return;
-
-    }
-
-
-    saldo -= valor;
-
-
-    adicionarMovimento(
-        "Pagamento simulado",
-        valor,
-        false
-    );
-
-
-    atualizarSaldo();
-
-}
-
-
-/* =========================
-   MODO ESCURO
-========================= */
-
-function modoEscuro() {
-
-    document.body.classList.toggle("escuro");
-
-
-    if (
-        document.body.classList.contains("escuro")
-    ) {
-
-        document.body.style.background =
-            "#101615";
-
-        document.querySelector(".app").style.background =
-            "#101615";
-
-    } else {
-
-        document.body.style.background =
-            "#eef3f0";
-
-        document.querySelector(".app").style.background =
-            "#eef3f0";
-
-    }
-
-}
-
-
-atualizarSaldo();
-
-</script>
-
-</body>
-
-    </html>
+    const destinatario =
+  
