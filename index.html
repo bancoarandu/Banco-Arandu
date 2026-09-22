@@ -163,7 +163,7 @@ body {
 
 .acoes {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin: 20px 0;
 }
@@ -292,6 +292,47 @@ body {
     cursor: pointer;
 }
 
+/* FORMULÁRIO */
+
+.formulario {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 18px;
+}
+
+.formulario label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.formulario input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d8e1dc;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.formulario input:focus {
+    border-color: #126b4a;
+}
+
+.botao-principal {
+    width: 100%;
+    margin-top: 18px;
+    padding: 15px;
+    border: none;
+    border-radius: 11px;
+    background: #126b4a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 /* AVISO */
 
 .aviso {
@@ -301,6 +342,23 @@ body {
     border-radius: 12px;
     font-size: 12px;
     margin-top: 15px;
+}
+
+/* MENSAGEM DE RECEBIMENTO */
+
+.recebimento {
+    background: #dff4e8;
+    color: #126b4a;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 18px;
+    display: none;
+}
+
+.recebimento strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
 /* MENU */
@@ -476,11 +534,22 @@ body {
 
         <button
             class="acao"
-            onclick="transferir()">
+            onclick="abrirTelaPorId('transferirTela')">
 
             <span>↗</span>
 
-            Transferir
+            Enviar dinheiro
+
+        </button>
+
+
+        <button
+            class="acao"
+            onclick="abrirTelaPorId('receberTela')">
+
+            <span>↓</span>
+
+            Receber dinheiro
 
         </button>
 
@@ -558,6 +627,122 @@ body {
         </div>
 
     </section>
+
+</section>
+
+
+<!-- =========================
+     ENVIAR DINHEIRO
+========================= -->
+
+<section
+    id="transferirTela"
+    class="tela">
+
+    <h2>
+        Enviar dinheiro
+    </h2>
+
+    <div class="formulario">
+
+        <h3>
+            Nova transferência
+        </h3>
+
+        <label for="nomeDestinatario">
+            Nome de quem vai receber
+        </label>
+
+        <input
+            type="text"
+            id="nomeDestinatario"
+            placeholder="Ex: João">
+
+        <label for="valorTransferencia">
+            Valor
+        </label>
+
+        <input
+            type="number"
+            id="valorTransferencia"
+            placeholder="Ex: 900"
+            min="0.01"
+            step="0.01">
+
+        <button
+            class="botao-principal"
+            onclick="enviarDinheiro()">
+
+            Enviar dinheiro
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     RECEBER DINHEIRO
+========================= -->
+
+<section
+    id="receberTela"
+    class="tela">
+
+    <h2>
+        Receber dinheiro
+    </h2>
+
+
+    <div
+        id="mensagemRecebimento"
+        class="recebimento">
+
+        <strong>
+            Dinheiro recebido!
+        </strong>
+
+        <span id="textoRecebimento"></span>
+
+    </div>
+
+
+    <div class="formulario">
+
+        <h3>
+            Registrar recebimento
+        </h3>
+
+        <label for="nomeRemetente">
+            Quem te mandou dinheiro?
+        </label>
+
+        <input
+            type="text"
+            id="nomeRemetente"
+            placeholder="Ex: Lucas">
+
+        <label for="valorRecebimento">
+            Valor?
+        </label>
+
+        <input
+            type="number"
+            id="valorRecebimento"
+            placeholder="Ex: 900"
+            min="0.01"
+            step="0.01">
+
+        <button
+            class="botao-principal"
+            onclick="receberDinheiro()">
+
+            Confirmar recebimento
+
+        </button>
+
+    </div>
 
 </section>
 
@@ -886,7 +1071,42 @@ function abrirTela(id, botao) {
     });
 
 
-    botao.classList.add("ativo");
+    if (botao) {
+        botao.classList.add("ativo");
+    }
+
+}
+
+
+/* =========================
+   ABRIR TELA SEM MENU
+========================= */
+
+function abrirTelaPorId(id) {
+
+    const telas =
+        document.querySelectorAll(".tela");
+
+    telas.forEach(function(tela) {
+
+        tela.classList.remove("ativa");
+
+    });
+
+
+    document
+        .getElementById(id)
+        .classList.add("ativa");
+
+
+    const botoes =
+        document.querySelectorAll(".menu button");
+
+    botoes.forEach(function(btn) {
+
+        btn.classList.remove("ativo");
+
+    });
 
 }
 
@@ -1045,17 +1265,35 @@ function depositar() {
 
 
 /* =========================
-   TRANSFERIR
+   ENVIAR DINHEIRO
 ========================= */
 
-function transferir() {
+function enviarDinheiro() {
+
+    const nome =
+        document
+            .getElementById("nomeDestinatario")
+            .value
+            .trim();
+
 
     const valor =
         Number(
-            prompt(
-                "Digite um valor fictício para transferir:"
-            )
+            document
+                .getElementById("valorTransferencia")
+                .value
         );
+
+
+    if (!nome) {
+
+        alert(
+            "Digite o nome de quem vai receber."
+        );
+
+        return;
+
+    }
 
 
     if (
@@ -1087,7 +1325,7 @@ function transferir() {
 
 
     adicionarMovimento(
-        "Transferência simulada",
+        "Enviado para " + nome,
         valor,
         false
     );
@@ -1095,99 +1333,48 @@ function transferir() {
 
     atualizarSaldo();
 
-}
 
-
-/* =========================
-   PAGAR
-========================= */
-
-function pagar() {
-
-    const valor =
-        Number(
-            prompt(
-                "Digite um valor fictício para pagar:"
-            )
-        );
-
-
-    if (
-        !valor ||
-        valor <= 0
-    ) {
-
-        alert(
-            "Digite um valor válido."
-        );
-
-        return;
-
-    }
-
-
-    if (valor > saldo) {
-
-        alert(
-            "Saldo insuficiente."
-        );
-
-        return;
-
-    }
-
-
-    saldo -= valor;
-
-
-    adicionarMovimento(
-        "Pagamento simulado",
-        valor,
-        false
+    alert(
+        "Você enviou " +
+        valor.toLocaleString(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL"
+            }
+        ) +
+        " para " +
+        nome +
+        "."
     );
 
 
-    atualizarSaldo();
+    document
+        .getElementById("nomeDestinatario")
+        .value = "";
+
+
+    document
+        .getElementById("valorTransferencia")
+        .value = "";
+
+
+    abrirTelaPorId("inicio");
 
 }
 
 
 /* =========================
-   MODO ESCURO
+   RECEBER DINHEIRO
 ========================= */
 
-function modoEscuro() {
+function receberDinheiro() {
 
-    document.body.classList.toggle("escuro");
-
-
-    if (
-        document.body.classList.contains("escuro")
-    ) {
-
-        document.body.style.background =
-            "#101615";
-
-        document.querySelector(".app").style.background =
-            "#101615";
-
-    } else {
-
-        document.body.style.background =
-            "#eef3f0";
-
-        document.querySelector(".app").style.background =
-            "#eef3f0";
-
-    }
-
-}
+    const nome =
+        document
+            .getElementById("nomeRemetente")
+            .value
+            .trim();
 
 
-atualizarSaldo();
-
-</script>
-
-</body>
-
-</html>
+  
