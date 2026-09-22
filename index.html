@@ -73,7 +73,7 @@ body {
     cursor: pointer;
 }
 
-/* APP */
+/* TOPO */
 #appPrincipal {
     display: none;
 }
@@ -112,12 +112,35 @@ body {
     margin-top: 3px;
 }
 
-.sair {
+.topo-direita {
+    display: flex;
+    gap: 8px;
+}
+
+.topo-btn {
     border: none;
     background: white;
-    padding: 10px;
-    border-radius: 10px;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
     cursor: pointer;
+    font-size: 19px;
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #d93636;
+    color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 10px;
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
 
 .conteudo {
@@ -154,7 +177,7 @@ body {
 /* AÇÕES */
 .acoes {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin: 20px 0;
 }
@@ -166,7 +189,7 @@ body {
     padding: 16px 5px;
     cursor: pointer;
     color: #17201d;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .acao span {
@@ -190,12 +213,12 @@ body {
     margin-top: 0;
 }
 
-/* EXTRATO */
+/* MOVIMENTAÇÕES */
 .movimento {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 13px 0;
+    padding: 14px 0;
     border-bottom: 1px solid #e5ebe7;
 }
 
@@ -204,13 +227,14 @@ body {
 }
 
 .mov-icon {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    font-weight: bold;
 }
 
 .entrada {
@@ -276,6 +300,77 @@ body {
     cursor: pointer;
 }
 
+/* PIX */
+.pix-chave {
+    background: #eef8f3;
+    padding: 14px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+.pix-chave small {
+    color: #718078;
+    display: block;
+}
+
+.pix-chave strong {
+    display: block;
+    margin-top: 5px;
+    color: #126b4a;
+    word-break: break-all;
+}
+
+.qr {
+    width: 150px;
+    height: 150px;
+    margin: 18px auto;
+    background:
+        linear-gradient(45deg, #111 25%, transparent 25%),
+        linear-gradient(-45deg, #111 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #111 75%),
+        linear-gradient(-45deg, transparent 75%, #111 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    border: 10px solid white;
+    box-shadow: 0 0 0 1px #ddd;
+}
+
+/* NOTIFICAÇÕES */
+.notificacoes {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 75px;
+    width: calc(100% - 40px);
+    max-width: 400px;
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.18);
+    z-index: 20;
+}
+
+.notificacoes h3 {
+    margin-top: 0;
+}
+
+.notificacao {
+    padding: 12px 0;
+    border-bottom: 1px solid #e5ebe7;
+}
+
+.notificacao:last-child {
+    border-bottom: none;
+}
+
+.notificacao strong {
+    display: block;
+}
+
+.notificacao small {
+    color: #718078;
+}
+
 /* RECEBIMENTO */
 .recebimento {
     display: none;
@@ -290,6 +385,19 @@ body {
     display: block;
     font-size: 18px;
     margin-bottom: 6px;
+}
+
+/* COMPROVANTE */
+.comprovante {
+    display: none;
+    background: #eef8f3;
+    border-radius: 15px;
+    padding: 18px;
+    margin-top: 18px;
+}
+
+.comprovante p {
+    margin: 8px 0;
 }
 
 /* CARTÃO */
@@ -395,13 +503,9 @@ body {
 <section id="entrada">
 
     <div class="logo-grande">
-
         <div class="icone">A</div>
-
         <h1>Banco Arandu</h1>
-
         <p>Uma experiência bancária demonstrativa</p>
-
     </div>
 
     <button class="entrar" onclick="entrar()">
@@ -411,28 +515,49 @@ body {
 </section>
 
 
-<!-- APLICATIVO -->
+<!-- APP -->
 <section id="appPrincipal">
 
 <header class="topo">
 
     <div class="usuario">
 
-        <!-- ALTERADO PARA U -->
         <div class="avatar">U</div>
 
         <div>
             <small>Olá,</small>
-
-            <!-- ALTERADO PARA USUÁRIO -->
             <strong>Usuário</strong>
         </div>
 
     </div>
 
-    <button class="sair" onclick="sair()">↪</button>
+    <div class="topo-direita">
+
+        <button class="topo-btn" onclick="mostrarNotificacoes()">
+            🔔
+            <span id="badge" class="badge">0</span>
+        </button>
+
+        <button class="topo-btn" onclick="sair()">
+            ↪
+        </button>
+
+    </div>
 
 </header>
+
+
+<div id="notificacoes" class="notificacoes">
+
+    <h3>Notificações</h3>
+
+    <div id="listaNotificacoes">
+        <p style="color:#718078;">
+            Nenhuma notificação nova.
+        </p>
+    </div>
+
+</div>
 
 
 <main class="conteudo">
@@ -443,11 +568,8 @@ body {
     <h2>Visão geral</h2>
 
     <div class="saldo">
-
         <small>Saldo disponível</small>
-
         <h2 id="saldo">R$ 2.500,00</h2>
-
     </div>
 
 
@@ -458,19 +580,14 @@ body {
             Depositar
         </button>
 
-        <button class="acao" onclick="abrirTelaPorId('transferirTela')">
-            <span>↗</span>
-            Enviar dinheiro
+        <button class="acao" onclick="abrirTelaPorId('pixEnviarTela')">
+            <span>⚡</span>
+            Enviar Pix
         </button>
 
-        <button class="acao" onclick="abrirTelaPorId('receberTela')">
-            <span>↓</span>
-            Receber dinheiro
-        </button>
-
-        <button class="acao" onclick="pagar()">
-            <span>▣</span>
-            Pagar
+        <button class="acao" onclick="abrirTelaPorId('pixReceberTela')">
+            <span>⇩</span>
+            Receber Pix
         </button>
 
     </div>
@@ -488,27 +605,11 @@ body {
 
                 <div class="mov-info">
                     <strong>Depósito</strong>
-                    <small>Hoje</small>
+                    <small>22/09/2026 • Inicial</small>
                 </div>
 
                 <strong class="positivo">
-                    + R$ 500,00
-                </strong>
-
-            </div>
-
-
-            <div class="movimento">
-
-                <div class="mov-icon saida">−</div>
-
-                <div class="mov-info">
-                    <strong>Compra simulada</strong>
-                    <small>Ontem</small>
-                </div>
-
-                <strong class="negativo">
-                    - R$ 75,00
+                    + R$ 2.500,00
                 </strong>
 
             </div>
@@ -520,33 +621,44 @@ body {
 </section>
 
 
-<!-- ENVIAR DINHEIRO -->
-<section id="transferirTela" class="tela">
+<!-- ENVIAR PIX -->
+<section id="pixEnviarTela" class="tela">
 
-    <h2>Enviar dinheiro</h2>
+    <h2>Enviar Pix</h2>
 
     <div class="formulario">
 
-        <h3>Nova transferência</h3>
+        <h3>Novo Pix</h3>
 
-        <label for="nomeDestinatario">
+        <label for="chavePixDestino">
+            Chave Pix de quem vai receber
+        </label>
+
+        <input
+            type="text"
+            id="chavePixDestino"
+            placeholder="Ex: joao@email.com"
+        >
+
+
+        <label for="nomePixDestino">
             Nome de quem vai receber
         </label>
 
         <input
             type="text"
-            id="nomeDestinatario"
+            id="nomePixDestino"
             placeholder="Ex: João"
         >
 
 
-        <label for="valorTransferencia">
+        <label for="valorPixEnvio">
             Valor
         </label>
 
         <input
             type="number"
-            id="valorTransferencia"
+            id="valorPixEnvio"
             placeholder="Ex: 900"
             min="0.01"
             step="0.01"
@@ -555,10 +667,19 @@ body {
 
         <button
             class="botao-principal"
-            onclick="enviarDinheiro()"
+            onclick="enviarPix()"
         >
-            Enviar dinheiro
+            Enviar Pix
         </button>
+
+    </div>
+
+
+    <div id="comprovanteEnvio" class="comprovante">
+
+        <h3>Pix realizado</h3>
+
+        <p id="dadosComprovante"></p>
 
     </div>
 
@@ -573,17 +694,17 @@ body {
 </section>
 
 
-<!-- RECEBER DINHEIRO -->
-<section id="receberTela" class="tela">
+<!-- RECEBER PIX -->
+<section id="pixReceberTela" class="tela">
 
-    <h2>Receber dinheiro</h2>
+    <h2>Receber Pix</h2>
 
     <div
         id="mensagemRecebimento"
         class="recebimento"
     >
 
-        <strong>Dinheiro recebido!</strong>
+        <strong>Pix recebido!</strong>
 
         <span id="textoRecebimento"></span>
 
@@ -592,26 +713,50 @@ body {
 
     <div class="formulario">
 
-        <h3>Registrar recebimento</h3>
+        <h3>Minha chave Pix</h3>
+
+        <div class="pix-chave">
+
+            <small>Chave Pix fictícia</small>
+
+            <strong id="minhaChave">
+                usuario@arandu.demo
+            </strong>
+
+        </div>
+
+        <button
+            class="botao-principal"
+            onclick="copiarChave()"
+        >
+            Copiar chave
+        </button>
+
+    </div>
+
+
+    <div class="formulario">
+
+        <h3>Simular recebimento</h3>
 
         <label for="nomeRemetente">
-            Quem te mandou dinheiro?
+            Quem te mandou o Pix?
         </label>
 
         <input
             type="text"
             id="nomeRemetente"
-            placeholder="Ex: Lucas"
+            placeholder="Ex: João"
         >
 
 
-        <label for="valorRecebimento">
-            Valor?
+        <label for="valorPixRecebimento">
+            Valor
         </label>
 
         <input
             type="number"
-            id="valorRecebimento"
+            id="valorPixRecebimento"
             placeholder="Ex: 900"
             min="0.01"
             step="0.01"
@@ -620,10 +765,23 @@ body {
 
         <button
             class="botao-principal"
-            onclick="receberDinheiro()"
+            onclick="receberPix()"
         >
             Confirmar recebimento
         </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>QR Code Pix</h3>
+
+        <div class="qr"></div>
+
+        <p style="text-align:center;">
+            QR Code demonstrativo
+        </p>
 
     </div>
 
@@ -654,28 +812,17 @@ body {
                 <div class="mov-icon entrada">＋</div>
 
                 <div class="mov-info">
-                    <strong>Depósito</strong>
-                    <small>Hoje</small>
+
+                    <strong>Saldo inicial</strong>
+
+                    <small>
+                        22/09/2026 • Conta demonstrativa
+                    </small>
+
                 </div>
 
                 <strong class="positivo">
-                    + R$ 500,00
-                </strong>
-
-            </div>
-
-
-            <div class="movimento">
-
-                <div class="mov-icon saida">−</div>
-
-                <div class="mov-info">
-                    <strong>Compra simulada</strong>
-                    <small>Ontem</small>
-                </div>
-
-                <strong class="negativo">
-                    - R$ 75,00
+                    + R$ 2.500,00
                 </strong>
 
             </div>
@@ -726,7 +873,6 @@ body {
 <section id="ajustesTela" class="tela">
 
     <h2>Ajustes</h2>
-
 
     <div class="config-item">
 
@@ -785,7 +931,6 @@ body {
         Início
     </button>
 
-
     <button
         onclick="abrirTela('extratoTela', this)"
     >
@@ -793,14 +938,12 @@ body {
         Extrato
     </button>
 
-
     <button
         onclick="abrirTela('cartaoTela', this)"
     >
         <span>▣</span>
         Cartão
     </button>
-
 
     <button
         onclick="abrirTela('ajustesTela', this)"
@@ -819,6 +962,7 @@ body {
 <script>
 
 let saldo = 2500;
+let quantidadeNotificacoes = 0;
 
 
 function entrar() {
@@ -841,31 +985,28 @@ function sair() {
 
 function abrirTela(id, botao) {
 
-    const telas = document.querySelectorAll(".tela");
+    const telas =
+        document.querySelectorAll(".tela");
 
     telas.forEach(function(tela) {
-
         tela.classList.remove("ativa");
-
     });
 
+    document
+        .getElementById(id)
+        .classList.add("ativa");
 
-    document.getElementById(id).classList.add("ativa");
 
-
-    const botoes = document.querySelectorAll(".menu button");
+    const botoes =
+        document.querySelectorAll(".menu button");
 
     botoes.forEach(function(btn) {
-
         btn.classList.remove("ativo");
-
     });
 
 
     if (botao) {
-
         botao.classList.add("ativo");
-
     }
 
 }
@@ -873,24 +1014,23 @@ function abrirTela(id, botao) {
 
 function abrirTelaPorId(id) {
 
-    const telas = document.querySelectorAll(".tela");
+    const telas =
+        document.querySelectorAll(".tela");
 
     telas.forEach(function(tela) {
-
         tela.classList.remove("ativa");
-
     });
 
+    document
+        .getElementById(id)
+        .classList.add("ativa");
 
-    document.getElementById(id).classList.add("ativa");
 
-
-    const botoes = document.querySelectorAll(".menu button");
+    const botoes =
+        document.querySelectorAll(".menu button");
 
     botoes.forEach(function(btn) {
-
         btn.classList.remove("ativo");
-
     });
 
 }
@@ -900,17 +1040,43 @@ function atualizarSaldo() {
 
     document.getElementById("saldo").textContent =
         saldo.toLocaleString("pt-BR", {
-
             style: "currency",
-
             currency: "BRL"
-
         });
 
 }
 
 
-function adicionarMovimento(nome, valor, entrada) {
+function formatarValor(valor) {
+
+    return valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+
+}
+
+
+function dataAtual() {
+
+    const agora = new Date();
+
+    return agora.toLocaleDateString("pt-BR") +
+        " • " +
+        agora.toLocaleTimeString("pt-BR", {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+
+}
+
+
+function adicionarMovimento(
+    nome,
+    valor,
+    entrada,
+    detalhes
+) {
 
     const extrato =
         document.getElementById("extrato");
@@ -948,22 +1114,14 @@ function adicionarMovimento(nome, valor, entrada) {
 
             <strong>${nome}</strong>
 
-            <small>Agora</small>
+            <small>
+                ${dataAtual()} • ${detalhes}
+            </small>
 
         </div>
 
         <strong class="${cor}">
-
-            ${sinal}
-
-            ${valor.toLocaleString("pt-BR", {
-
-                style: "currency",
-
-                currency: "BRL"
-
-            })}
-
+            ${sinal} ${formatarValor(valor)}
         </strong>
 
     `;
@@ -978,13 +1136,99 @@ function adicionarMovimento(nome, valor, entrada) {
 }
 
 
+function adicionarNotificacao(
+    titulo,
+    texto
+) {
+
+    const lista =
+        document.getElementById(
+            "listaNotificacoes"
+        );
+
+
+    const vazio =
+        lista.querySelector("p");
+
+    if (vazio) {
+        vazio.remove();
+    }
+
+
+    const notificacao =
+        document.createElement("div");
+
+
+    notificacao.className =
+        "notificacao";
+
+
+    notificacao.innerHTML = `
+
+        <strong>${titulo}</strong>
+
+        <small>
+            ${texto}<br>
+            ${dataAtual()}
+        </small>
+
+    `;
+
+
+    lista.prepend(notificacao);
+
+
+    quantidadeNotificacoes++;
+
+
+    const badge =
+        document.getElementById("badge");
+
+    badge.textContent =
+        quantidadeNotificacoes;
+
+    badge.style.display =
+        "flex";
+
+}
+
+
+function mostrarNotificacoes() {
+
+    const painel =
+        document.getElementById(
+            "notificacoes"
+        );
+
+
+    if (painel.style.display === "block") {
+
+        painel.style.display = "none";
+
+    } else {
+
+        painel.style.display = "block";
+
+        quantidadeNotificacoes = 0;
+
+        const badge =
+            document.getElementById("badge");
+
+        badge.style.display = "none";
+
+    }
+
+}
+
+
 function depositar() {
 
-    const valor = Number(
-        prompt(
-            "Digite um valor fictício para depositar:"
-        )
-    );
+    const valor =
+        Number(
+            prompt(
+                "Digite um valor fictício para depositar:"
+            )
+        );
 
 
     if (!valor || valor <= 0) {
@@ -998,281 +1242,9 @@ function depositar() {
 
     saldo += valor;
 
+
     adicionarMovimento(
         "Depósito simulado",
         valor,
-        true
-    );
-
-    atualizarSaldo();
-
-}
-
-
-function enviarDinheiro() {
-
-    const nome =
-        document
-        .getElementById("nomeDestinatario")
-        .value
-        .trim();
-
-
-    const valor =
-        Number(
-            document
-            .getElementById("valorTransferencia")
-            .value
-        );
-
-
-    if (!nome) {
-
-        alert(
-            "Digite o nome de quem vai receber."
-        );
-
-        return;
-
-    }
-
-
-    if (!valor || valor <= 0) {
-
-        alert(
-            "Digite um valor válido."
-        );
-
-        return;
-
-    }
-
-
-    if (valor > saldo) {
-
-        alert(
-            "Saldo insuficiente."
-        );
-
-        return;
-
-    }
-
-
-    saldo -= valor;
-
-
-    adicionarMovimento(
-        "Enviado para " + nome,
-        valor,
-        false
-    );
-
-
-    atualizarSaldo();
-
-
-    alert(
-
-        "Você enviou " +
-
-        valor.toLocaleString("pt-BR", {
-
-            style: "currency",
-
-            currency: "BRL"
-
-        }) +
-
-        " para " +
-
-        nome +
-
-        "."
-
-    );
-
-
-    document
-    .getElementById("nomeDestinatario")
-    .value = "";
-
-
-    document
-    .getElementById("valorTransferencia")
-    .value = "";
-
-
-    abrirTelaPorId("inicio");
-
-}
-
-
-function receberDinheiro() {
-
-    const nome =
-        document
-        .getElementById("nomeRemetente")
-        .value
-        .trim();
-
-
-    const valor =
-        Number(
-            document
-            .getElementById("valorRecebimento")
-            .value
-        );
-
-
-    if (!nome) {
-
-        alert(
-            "Digite o nome de quem mandou o dinheiro."
-        );
-
-        return;
-
-    }
-
-
-    if (!valor || valor <= 0) {
-
-        alert(
-            "Digite um valor válido."
-        );
-
-        return;
-
-    }
-
-
-    saldo += valor;
-
-
-    adicionarMovimento(
-        "Recebido de " + nome,
-        valor,
-        true
-    );
-
-
-    atualizarSaldo();
-
-
-    const valorFormatado =
-        valor.toLocaleString("pt-BR", {
-
-            style: "currency",
-
-            currency: "BRL"
-
-        });
-
-
-    document
-    .getElementById("textoRecebimento")
-    .textContent =
-        "Você recebeu " +
-        valorFormatado +
-        " de " +
-        nome +
-        ".";
-
-
-    document
-    .getElementById("mensagemRecebimento")
-    .style.display = "block";
-
-
-    document
-    .getElementById("nomeRemetente")
-    .value = "";
-
-
-    document
-    .getElementById("valorRecebimento")
-    .value = "";
-
-}
-
-
-function pagar() {
-
-    const valor = Number(
-        prompt(
-            "Digite um valor fictício para pagar:"
-        )
-    );
-
-
-    if (!valor || valor <= 0) {
-
-        alert(
-            "Digite um valor válido."
-        );
-
-        return;
-
-    }
-
-
-    if (valor > saldo) {
-
-        alert(
-            "Saldo insuficiente."
-        );
-
-        return;
-
-    }
-
-
-    saldo -= valor;
-
-
-    adicionarMovimento(
-        "Pagamento simulado",
-        valor,
-        false
-    );
-
-
-    atualizarSaldo();
-
-}
-
-
-function modoEscuro() {
-
-    const escuro =
-        document.body.classList.toggle("escuro");
-
-
-    if (escuro) {
-
-        document.body.style.background =
-            "#101615";
-
-        document.querySelector(".app").style.background =
-            "#101615";
-
-    } else {
-
-        document.body.style.background =
-            "#eef3f0";
-
-        document.querySelector(".app").style.background =
-            "#eef3f0";
-
-    }
-
-}
-
-
-atualizarSaldo();
-
-</script>
-
-</body>
-            </html>
+        true,
+        "Depó
