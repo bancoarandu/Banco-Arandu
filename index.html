@@ -25,8 +25,7 @@ body {
     padding-bottom: 85px;
 }
 
-/* ENTRADA */
-
+/* LOGIN */
 #entrada {
     min-height: 100vh;
     display: flex;
@@ -74,8 +73,7 @@ body {
     cursor: pointer;
 }
 
-/* APLICATIVO */
-
+/* APP */
 #appPrincipal {
     display: none;
 }
@@ -126,8 +124,6 @@ body {
     padding: 10px 20px;
 }
 
-/* TELAS */
-
 .tela {
     display: none;
 }
@@ -137,7 +133,6 @@ body {
 }
 
 /* SALDO */
-
 .saldo {
     background: linear-gradient(135deg, #126b4a, #08442f);
     color: white;
@@ -157,7 +152,6 @@ body {
 }
 
 /* AÇÕES */
-
 .acoes {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -183,7 +177,6 @@ body {
 }
 
 /* CARDS */
-
 .card,
 .formulario {
     background: white;
@@ -198,7 +191,6 @@ body {
 }
 
 /* EXTRATO */
-
 .movimento {
     display: flex;
     align-items: center;
@@ -252,7 +244,6 @@ body {
 }
 
 /* FORMULÁRIOS */
-
 .formulario label {
     display: block;
     margin-top: 15px;
@@ -286,7 +277,6 @@ body {
 }
 
 /* RECEBIMENTO */
-
 .recebimento {
     display: none;
     background: #dff4e8;
@@ -303,7 +293,6 @@ body {
 }
 
 /* CARTÃO */
-
 .cartao {
     height: 180px;
     border-radius: 20px;
@@ -324,7 +313,6 @@ body {
 }
 
 /* AJUSTES */
-
 .config-item {
     background: white;
     padding: 18px;
@@ -344,8 +332,6 @@ body {
     cursor: pointer;
 }
 
-/* AVISO */
-
 .aviso {
     background: #fff3bf;
     color: #665300;
@@ -356,7 +342,6 @@ body {
 }
 
 /* MENU */
-
 .menu {
     position: fixed;
     bottom: 0;
@@ -390,8 +375,6 @@ body {
     color: #126b4a;
 }
 
-/* CELULAR */
-
 @media (max-width: 450px) {
     .saldo h2 {
         font-size: 29px;
@@ -408,8 +391,7 @@ body {
 
 <div class="app">
 
-<!-- ENTRADA -->
-
+<!-- LOGIN -->
 <section id="entrada">
 
     <div class="logo-grande">
@@ -430,18 +412,20 @@ body {
 
 
 <!-- APLICATIVO -->
-
 <section id="appPrincipal">
 
 <header class="topo">
 
     <div class="usuario">
 
-        <div class="avatar">LA</div>
+        <!-- ALTERADO PARA U -->
+        <div class="avatar">U</div>
 
         <div>
             <small>Olá,</small>
-            <strong>Lucas</strong>
+
+            <!-- ALTERADO PARA USUÁRIO -->
+            <strong>Usuário</strong>
         </div>
 
     </div>
@@ -453,9 +437,7 @@ body {
 
 <main class="conteudo">
 
-
 <!-- INÍCIO -->
-
 <section id="inicio" class="tela ativa">
 
     <h2>Visão geral</h2>
@@ -539,7 +521,6 @@ body {
 
 
 <!-- ENVIAR DINHEIRO -->
-
 <section id="transferirTela" class="tela">
 
     <h2>Enviar dinheiro</h2>
@@ -555,7 +536,9 @@ body {
         <input
             type="text"
             id="nomeDestinatario"
-            placeholder="Ex: João">
+            placeholder="Ex: João"
+        >
+
 
         <label for="valorTransferencia">
             Valor
@@ -566,32 +549,39 @@ body {
             id="valorTransferencia"
             placeholder="Ex: 900"
             min="0.01"
-            step="0.01">
+            step="0.01"
+        >
 
-        <button class="botao-principal" onclick="enviarDinheiro()">
+
+        <button
+            class="botao-principal"
+            onclick="enviarDinheiro()"
+        >
             Enviar dinheiro
         </button>
 
     </div>
 
+
     <button
         class="botao-principal"
-        onclick="abrirTelaPorId('inicio')">
-
+        onclick="abrirTelaPorId('inicio')"
+    >
         Voltar
-
     </button>
 
 </section>
 
 
 <!-- RECEBER DINHEIRO -->
-
 <section id="receberTela" class="tela">
 
     <h2>Receber dinheiro</h2>
 
-    <div id="mensagemRecebimento" class="recebimento">
+    <div
+        id="mensagemRecebimento"
+        class="recebimento"
+    >
 
         <strong>Dinheiro recebido!</strong>
 
@@ -611,7 +601,9 @@ body {
         <input
             type="text"
             id="nomeRemetente"
-            placeholder="Ex: Lucas">
+            placeholder="Ex: Lucas"
+        >
+
 
         <label for="valorRecebimento">
             Valor?
@@ -622,31 +614,31 @@ body {
             id="valorRecebimento"
             placeholder="Ex: 900"
             min="0.01"
-            step="0.01">
+            step="0.01"
+        >
+
 
         <button
             class="botao-principal"
-            onclick="receberDinheiro()">
-
+            onclick="receberDinheiro()"
+        >
             Confirmar recebimento
-
         </button>
 
     </div>
 
+
     <button
         class="botao-principal"
-        onclick="abrirTelaPorId('inicio')">
-
+        onclick="abrirTelaPorId('inicio')"
+    >
         Voltar
-
     </button>
 
 </section>
 
 
 <!-- EXTRATO -->
-
 <section id="extratoTela" class="tela">
 
     <h2>Extrato</h2>
@@ -696,7 +688,6 @@ body {
 
 
 <!-- CARTÃO -->
-
 <section id="cartaoTela" class="tela">
 
     <h2>Meu cartão</h2>
@@ -706,11 +697,8 @@ body {
         <div class="cartao">
 
             <div class="cartao-topo">
-
                 <strong>BANCO ARANDU</strong>
-
                 <span>💳</span>
-
             </div>
 
             <div class="numero">
@@ -735,10 +723,10 @@ body {
 
 
 <!-- AJUSTES -->
-
 <section id="ajustesTela" class="tela">
 
     <h2>Ajustes</h2>
+
 
     <div class="config-item">
 
@@ -787,40 +775,38 @@ body {
 
 
 <!-- MENU -->
-
 <nav class="menu">
 
     <button
         class="ativo"
-        onclick="abrirTela('inicio', this)">
-
+        onclick="abrirTela('inicio', this)"
+    >
         <span>⌂</span>
         Início
-
     </button>
 
 
-    <button onclick="abrirTela('extratoTela', this)">
-
+    <button
+        onclick="abrirTela('extratoTela', this)"
+    >
         <span>▤</span>
         Extrato
-
     </button>
 
 
-    <button onclick="abrirTela('cartaoTela', this)">
-
+    <button
+        onclick="abrirTela('cartaoTela', this)"
+    >
         <span>▣</span>
         Cartão
-
     </button>
 
 
-    <button onclick="abrirTela('ajustesTela', this)">
-
+    <button
+        onclick="abrirTela('ajustesTela', this)"
+    >
         <span>⚙</span>
         Ajustes
-
     </button>
 
 </nav>
@@ -835,8 +821,6 @@ body {
 let saldo = 2500;
 
 
-/* ENTRAR */
-
 function entrar() {
 
     document.getElementById("entrada").style.display = "none";
@@ -845,8 +829,6 @@ function entrar() {
 
 }
 
-
-/* SAIR */
 
 function sair() {
 
@@ -857,15 +839,16 @@ function sair() {
 }
 
 
-/* ABRIR TELA */
-
 function abrirTela(id, botao) {
 
     const telas = document.querySelectorAll(".tela");
 
     telas.forEach(function(tela) {
+
         tela.classList.remove("ativa");
+
     });
+
 
     document.getElementById(id).classList.add("ativa");
 
@@ -873,25 +856,31 @@ function abrirTela(id, botao) {
     const botoes = document.querySelectorAll(".menu button");
 
     botoes.forEach(function(btn) {
+
         btn.classList.remove("ativo");
+
     });
 
+
     if (botao) {
+
         botao.classList.add("ativo");
+
     }
 
 }
 
-
-/* ABRIR TELA SEM MENU */
 
 function abrirTelaPorId(id) {
 
     const telas = document.querySelectorAll(".tela");
 
     telas.forEach(function(tela) {
+
         tela.classList.remove("ativa");
+
     });
+
 
     document.getElementById(id).classList.add("ativa");
 
@@ -899,45 +888,54 @@ function abrirTelaPorId(id) {
     const botoes = document.querySelectorAll(".menu button");
 
     botoes.forEach(function(btn) {
+
         btn.classList.remove("ativo");
+
     });
 
 }
 
 
-/* ATUALIZAR SALDO */
-
 function atualizarSaldo() {
 
     document.getElementById("saldo").textContent =
         saldo.toLocaleString("pt-BR", {
+
             style: "currency",
+
             currency: "BRL"
+
         });
 
 }
 
 
-/* ADICIONAR MOVIMENTO */
-
 function adicionarMovimento(nome, valor, entrada) {
 
-    const extrato = document.getElementById("extrato");
+    const extrato =
+        document.getElementById("extrato");
 
-    const resumo = document.getElementById("resumoExtrato");
+    const resumo =
+        document.getElementById("resumoExtrato");
 
-    const movimento = document.createElement("div");
+    const movimento =
+        document.createElement("div");
+
 
     movimento.className = "movimento";
 
 
-    const classe = entrada ? "entrada" : "saida";
+    const classe =
+        entrada ? "entrada" : "saida";
 
-    const cor = entrada ? "positivo" : "negativo";
+    const cor =
+        entrada ? "positivo" : "negativo";
 
-    const simbolo = entrada ? "+" : "−";
+    const simbolo =
+        entrada ? "+" : "−";
 
-    const sinal = entrada ? "+" : "-";
+    const sinal =
+        entrada ? "+" : "-";
 
 
     movimento.innerHTML = `
@@ -955,28 +953,37 @@ function adicionarMovimento(nome, valor, entrada) {
         </div>
 
         <strong class="${cor}">
-            ${sinal} ${valor.toLocaleString("pt-BR", {
+
+            ${sinal}
+
+            ${valor.toLocaleString("pt-BR", {
+
                 style: "currency",
+
                 currency: "BRL"
+
             })}
+
         </strong>
 
     `;
 
 
-    extrato.prepend(movimento.cloneNode(true));
+    extrato.prepend(
+        movimento.cloneNode(true)
+    );
 
     resumo.prepend(movimento);
 
 }
 
 
-/* DEPOSITAR */
-
 function depositar() {
 
     const valor = Number(
-        prompt("Digite um valor fictício para depositar:")
+        prompt(
+            "Digite um valor fictício para depositar:"
+        )
     );
 
 
@@ -1002,24 +1009,28 @@ function depositar() {
 }
 
 
-/* ENVIAR DINHEIRO */
-
 function enviarDinheiro() {
 
-    const nome = document
+    const nome =
+        document
         .getElementById("nomeDestinatario")
         .value
         .trim();
 
 
-    const valor = Number(
-        document.getElementById("valorTransferencia").value
-    );
+    const valor =
+        Number(
+            document
+            .getElementById("valorTransferencia")
+            .value
+        );
 
 
     if (!nome) {
 
-        alert("Digite o nome de quem vai receber.");
+        alert(
+            "Digite o nome de quem vai receber."
+        );
 
         return;
 
@@ -1028,7 +1039,9 @@ function enviarDinheiro() {
 
     if (!valor || valor <= 0) {
 
-        alert("Digite um valor válido.");
+        alert(
+            "Digite um valor válido."
+        );
 
         return;
 
@@ -1037,7 +1050,9 @@ function enviarDinheiro() {
 
     if (valor > saldo) {
 
-        alert("Saldo insuficiente.");
+        alert(
+            "Saldo insuficiente."
+        );
 
         return;
 
@@ -1058,20 +1073,34 @@ function enviarDinheiro() {
 
 
     alert(
+
         "Você enviou " +
+
         valor.toLocaleString("pt-BR", {
+
             style: "currency",
+
             currency: "BRL"
+
         }) +
+
         " para " +
+
         nome +
+
         "."
+
     );
 
 
-    document.getElementById("nomeDestinatario").value = "";
+    document
+    .getElementById("nomeDestinatario")
+    .value = "";
 
-    document.getElementById("valorTransferencia").value = "";
+
+    document
+    .getElementById("valorTransferencia")
+    .value = "";
 
 
     abrirTelaPorId("inicio");
@@ -1079,24 +1108,28 @@ function enviarDinheiro() {
 }
 
 
-/* RECEBER DINHEIRO */
-
 function receberDinheiro() {
 
-    const nome = document
+    const nome =
+        document
         .getElementById("nomeRemetente")
         .value
         .trim();
 
 
-    const valor = Number(
-        document.getElementById("valorRecebimento").value
-    );
+    const valor =
+        Number(
+            document
+            .getElementById("valorRecebimento")
+            .value
+        );
 
 
     if (!nome) {
 
-        alert("Digite o nome de quem mandou o dinheiro.");
+        alert(
+            "Digite o nome de quem mandou o dinheiro."
+        );
 
         return;
 
@@ -1105,7 +1138,9 @@ function receberDinheiro() {
 
     if (!valor || valor <= 0) {
 
-        alert("Digite um valor válido.");
+        alert(
+            "Digite um valor válido."
+        );
 
         return;
 
@@ -1127,12 +1162,17 @@ function receberDinheiro() {
 
     const valorFormatado =
         valor.toLocaleString("pt-BR", {
+
             style: "currency",
+
             currency: "BRL"
+
         });
 
 
-    document.getElementById("textoRecebimento").textContent =
+    document
+    .getElementById("textoRecebimento")
+    .textContent =
         "Você recebeu " +
         valorFormatado +
         " de " +
@@ -1140,29 +1180,37 @@ function receberDinheiro() {
         ".";
 
 
-    document.getElementById("mensagemRecebimento").style.display =
-        "block";
+    document
+    .getElementById("mensagemRecebimento")
+    .style.display = "block";
 
 
-    document.getElementById("nomeRemetente").value = "";
+    document
+    .getElementById("nomeRemetente")
+    .value = "";
 
-    document.getElementById("valorRecebimento").value = "";
+
+    document
+    .getElementById("valorRecebimento")
+    .value = "";
 
 }
 
 
-/* PAGAR */
-
 function pagar() {
 
     const valor = Number(
-        prompt("Digite um valor fictício para pagar:")
+        prompt(
+            "Digite um valor fictício para pagar:"
+        )
     );
 
 
     if (!valor || valor <= 0) {
 
-        alert("Digite um valor válido.");
+        alert(
+            "Digite um valor válido."
+        );
 
         return;
 
@@ -1171,7 +1219,9 @@ function pagar() {
 
     if (valor > saldo) {
 
-        alert("Saldo insuficiente.");
+        alert(
+            "Saldo insuficiente."
+        );
 
         return;
 
@@ -1193,8 +1243,6 @@ function pagar() {
 }
 
 
-/* MODO ESCURO */
-
 function modoEscuro() {
 
     const escuro =
@@ -1203,26 +1251,28 @@ function modoEscuro() {
 
     if (escuro) {
 
-        document.body.style.background = "#101615";
+        document.body.style.background =
+            "#101615";
 
-        document.querySelector(".app").style.background = "#101615";
+        document.querySelector(".app").style.background =
+            "#101615";
 
     } else {
 
-        document.body.style.background = "#eef3f0";
+        document.body.style.background =
+            "#eef3f0";
 
-        document.querySelector(".app").style.background = "#eef3f0";
+        document.querySelector(".app").style.background =
+            "#eef3f0";
 
     }
 
 }
 
 
-/* INICIAR SALDO */
-
 atualizarSaldo();
 
 </script>
 
 </body>
-        </html>
+            </html>
