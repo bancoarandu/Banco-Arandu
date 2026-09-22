@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Banco Arandu</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -175,6 +172,7 @@ body {
     padding: 16px 5px;
     cursor: pointer;
     color: #17201d;
+    font-size: 14px;
 }
 
 .acao span {
@@ -186,14 +184,16 @@ body {
 
 /* CARDS */
 
-.card {
+.card,
+.formulario {
     background: white;
     border-radius: 18px;
     padding: 20px;
     margin-bottom: 18px;
 }
 
-.card h3 {
+.card h3,
+.formulario h3 {
     margin-top: 0;
 }
 
@@ -218,6 +218,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .entrada {
@@ -248,6 +249,57 @@ body {
 
 .negativo {
     color: #c43d35;
+}
+
+/* FORMULÁRIOS */
+
+.formulario label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.formulario input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d8e1dc;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.formulario input:focus {
+    border-color: #126b4a;
+}
+
+.botao-principal {
+    width: 100%;
+    margin-top: 18px;
+    padding: 15px;
+    border: none;
+    border-radius: 11px;
+    background: #126b4a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* RECEBIMENTO */
+
+.recebimento {
+    display: none;
+    background: #dff4e8;
+    color: #126b4a;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 18px;
+}
+
+.recebimento strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 6px;
 }
 
 /* CARTÃO */
@@ -292,47 +344,6 @@ body {
     cursor: pointer;
 }
 
-/* FORMULÁRIO */
-
-.formulario {
-    background: white;
-    border-radius: 18px;
-    padding: 20px;
-    margin-bottom: 18px;
-}
-
-.formulario label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 6px;
-    font-weight: bold;
-}
-
-.formulario input {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #d8e1dc;
-    border-radius: 10px;
-    font-size: 16px;
-    outline: none;
-}
-
-.formulario input:focus {
-    border-color: #126b4a;
-}
-
-.botao-principal {
-    width: 100%;
-    margin-top: 18px;
-    padding: 15px;
-    border: none;
-    border-radius: 11px;
-    background: #126b4a;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
 /* AVISO */
 
 .aviso {
@@ -342,23 +353,6 @@ body {
     border-radius: 12px;
     font-size: 12px;
     margin-top: 15px;
-}
-
-/* MENSAGEM DE RECEBIMENTO */
-
-.recebimento {
-    background: #dff4e8;
-    color: #126b4a;
-    padding: 18px;
-    border-radius: 15px;
-    margin-bottom: 18px;
-    display: none;
-}
-
-.recebimento strong {
-    display: block;
-    font-size: 18px;
-    margin-bottom: 5px;
 }
 
 /* MENU */
@@ -375,6 +369,7 @@ body {
     display: flex;
     justify-content: space-around;
     padding: 9px 5px;
+    z-index: 10;
 }
 
 .menu button {
@@ -397,8 +392,7 @@ body {
 
 /* CELULAR */
 
-@media(max-width: 450px) {
-
+@media (max-width: 450px) {
     .saldo h2 {
         font-size: 29px;
     }
@@ -406,86 +400,53 @@ body {
     .acao {
         font-size: 11px;
     }
-
 }
-
 </style>
 </head>
-
 
 <body>
 
 <div class="app">
 
-
-<!-- =========================
-     TELA DE ENTRADA
-========================= -->
+<!-- ENTRADA -->
 
 <section id="entrada">
 
     <div class="logo-grande">
 
-        <div class="icone">
-            A
-        </div>
+        <div class="icone">A</div>
 
         <h1>Banco Arandu</h1>
 
-        <p>
-            Uma experiência bancária demonstrativa
-        </p>
+        <p>Uma experiência bancária demonstrativa</p>
 
     </div>
 
-    <button
-        class="entrar"
-        onclick="entrar()">
-
+    <button class="entrar" onclick="entrar()">
         Entrar na conta demonstrativa
-
     </button>
 
 </section>
 
 
-<!-- =========================
-     APLICATIVO
-========================= -->
+<!-- APLICATIVO -->
 
 <section id="appPrincipal">
-
 
 <header class="topo">
 
     <div class="usuario">
 
-        <div class="avatar">
-            LA
-        </div>
+        <div class="avatar">LA</div>
 
         <div>
-
-            <small>
-                Olá,
-            </small>
-
-            <strong>
-                Lucas
-            </strong>
-
+            <small>Olá,</small>
+            <strong>Lucas</strong>
         </div>
 
     </div>
 
-
-    <button
-        class="sair"
-        onclick="sair()">
-
-        ↪
-
-    </button>
+    <button class="sair" onclick="sair()">↪</button>
 
 </header>
 
@@ -493,75 +454,41 @@ body {
 <main class="conteudo">
 
 
-<!-- =========================
-     INÍCIO
-========================= -->
+<!-- INÍCIO -->
 
-<section
-    id="inicio"
-    class="tela ativa">
+<section id="inicio" class="tela ativa">
 
-    <h2>
-        Visão geral
-    </h2>
-
+    <h2>Visão geral</h2>
 
     <div class="saldo">
 
-        <small>
-            Saldo disponível
-        </small>
+        <small>Saldo disponível</small>
 
-        <h2 id="saldo">
-            R$ 2.500,00
-        </h2>
+        <h2 id="saldo">R$ 2.500,00</h2>
 
     </div>
 
 
     <div class="acoes">
 
-        <button
-            class="acao"
-            onclick="depositar()">
-
+        <button class="acao" onclick="depositar()">
             <span>＋</span>
-
             Depositar
-
         </button>
 
-
-        <button
-            class="acao"
-            onclick="abrirTelaPorId('transferirTela')">
-
+        <button class="acao" onclick="abrirTelaPorId('transferirTela')">
             <span>↗</span>
-
             Enviar dinheiro
-
         </button>
 
-
-        <button
-            class="acao"
-            onclick="abrirTelaPorId('receberTela')">
-
+        <button class="acao" onclick="abrirTelaPorId('receberTela')">
             <span>↓</span>
-
             Receber dinheiro
-
         </button>
 
-
-        <button
-            class="acao"
-            onclick="pagar()">
-
+        <button class="acao" onclick="pagar()">
             <span>▣</span>
-
             Pagar
-
         </button>
 
     </div>
@@ -569,28 +496,17 @@ body {
 
     <section class="card">
 
-        <h3>
-            Últimas movimentações
-        </h3>
+        <h3>Últimas movimentações</h3>
 
         <div id="resumoExtrato">
 
             <div class="movimento">
 
-                <div class="mov-icon entrada">
-                    ＋
-                </div>
+                <div class="mov-icon entrada">＋</div>
 
                 <div class="mov-info">
-
-                    <strong>
-                        Depósito
-                    </strong>
-
-                    <small>
-                        Hoje
-                    </small>
-
+                    <strong>Depósito</strong>
+                    <small>Hoje</small>
                 </div>
 
                 <strong class="positivo">
@@ -602,20 +518,11 @@ body {
 
             <div class="movimento">
 
-                <div class="mov-icon saida">
-                    −
-                </div>
+                <div class="mov-icon saida">−</div>
 
                 <div class="mov-info">
-
-                    <strong>
-                        Compra simulada
-                    </strong>
-
-                    <small>
-                        Ontem
-                    </small>
-
+                    <strong>Compra simulada</strong>
+                    <small>Ontem</small>
                 </div>
 
                 <strong class="negativo">
@@ -631,23 +538,15 @@ body {
 </section>
 
 
-<!-- =========================
-     ENVIAR DINHEIRO
-========================= -->
+<!-- ENVIAR DINHEIRO -->
 
-<section
-    id="transferirTela"
-    class="tela">
+<section id="transferirTela" class="tela">
 
-    <h2>
-        Enviar dinheiro
-    </h2>
+    <h2>Enviar dinheiro</h2>
 
     <div class="formulario">
 
-        <h3>
-            Nova transferência
-        </h3>
+        <h3>Nova transferência</h3>
 
         <label for="nomeDestinatario">
             Nome de quem vai receber
@@ -669,39 +568,32 @@ body {
             min="0.01"
             step="0.01">
 
-        <button
-            class="botao-principal"
-            onclick="enviarDinheiro()">
-
+        <button class="botao-principal" onclick="enviarDinheiro()">
             Enviar dinheiro
-
         </button>
 
     </div>
 
+    <button
+        class="botao-principal"
+        onclick="abrirTelaPorId('inicio')">
+
+        Voltar
+
+    </button>
+
 </section>
 
 
-<!-- =========================
-     RECEBER DINHEIRO
-========================= -->
+<!-- RECEBER DINHEIRO -->
 
-<section
-    id="receberTela"
-    class="tela">
+<section id="receberTela" class="tela">
 
-    <h2>
-        Receber dinheiro
-    </h2>
+    <h2>Receber dinheiro</h2>
 
+    <div id="mensagemRecebimento" class="recebimento">
 
-    <div
-        id="mensagemRecebimento"
-        class="recebimento">
-
-        <strong>
-            Dinheiro recebido!
-        </strong>
+        <strong>Dinheiro recebido!</strong>
 
         <span id="textoRecebimento"></span>
 
@@ -710,9 +602,7 @@ body {
 
     <div class="formulario">
 
-        <h3>
-            Registrar recebimento
-        </h3>
+        <h3>Registrar recebimento</h3>
 
         <label for="nomeRemetente">
             Quem te mandou dinheiro?
@@ -744,45 +634,36 @@ body {
 
     </div>
 
+    <button
+        class="botao-principal"
+        onclick="abrirTelaPorId('inicio')">
+
+        Voltar
+
+    </button>
+
 </section>
 
 
-<!-- =========================
-     EXTRATO
-========================= -->
+<!-- EXTRATO -->
 
-<section
-    id="extratoTela"
-    class="tela">
+<section id="extratoTela" class="tela">
 
-    <h2>
-        Extrato
-    </h2>
+    <h2>Extrato</h2>
 
     <section class="card">
 
-        <h3>
-            Todas as movimentações
-        </h3>
+        <h3>Todas as movimentações</h3>
 
         <div id="extrato">
 
             <div class="movimento">
 
-                <div class="mov-icon entrada">
-                    ＋
-                </div>
+                <div class="mov-icon entrada">＋</div>
 
                 <div class="mov-info">
-
-                    <strong>
-                        Depósito
-                    </strong>
-
-                    <small>
-                        Hoje
-                    </small>
-
+                    <strong>Depósito</strong>
+                    <small>Hoje</small>
                 </div>
 
                 <strong class="positivo">
@@ -794,20 +675,11 @@ body {
 
             <div class="movimento">
 
-                <div class="mov-icon saida">
-                    −
-                </div>
+                <div class="mov-icon saida">−</div>
 
                 <div class="mov-info">
-
-                    <strong>
-                        Compra simulada
-                    </strong>
-
-                    <small>
-                        Ontem
-                    </small>
-
+                    <strong>Compra simulada</strong>
+                    <small>Ontem</small>
                 </div>
 
                 <strong class="negativo">
@@ -823,18 +695,11 @@ body {
 </section>
 
 
-<!-- =========================
-     CARTÃO
-========================= -->
+<!-- CARTÃO -->
 
-<section
-    id="cartaoTela"
-    class="tela">
+<section id="cartaoTela" class="tela">
 
-    <h2>
-        Meu cartão
-    </h2>
-
+    <h2>Meu cartão</h2>
 
     <section class="card">
 
@@ -842,33 +707,23 @@ body {
 
             <div class="cartao-topo">
 
-                <strong>
-                    BANCO ARANDU
-                </strong>
+                <strong>BANCO ARANDU</strong>
 
-                <span>
-                    💳
-                </span>
+                <span>💳</span>
 
             </div>
-
 
             <div class="numero">
                 •••• •••• •••• 2026
             </div>
 
-
-            <small>
-                CARTÃO FICTÍCIO
-            </small>
+            <small>CARTÃO FICTÍCIO</small>
 
         </div>
 
         <br>
 
-        <p>
-            Cartão demonstrativo
-        </p>
+        <p>Cartão demonstrativo</p>
 
         <small>
             Este cartão não possui função de pagamento real.
@@ -879,30 +734,18 @@ body {
 </section>
 
 
-<!-- =========================
-     AJUSTES
-========================= -->
+<!-- AJUSTES -->
 
-<section
-    id="ajustesTela"
-    class="tela">
+<section id="ajustesTela" class="tela">
 
-    <h2>
-        Ajustes
-    </h2>
-
+    <h2>Ajustes</h2>
 
     <div class="config-item">
 
-        <span>
-            🌙 Modo escuro
-        </span>
+        <span>🌙 Modo escuro</span>
 
-        <button
-            onclick="modoEscuro()">
-
+        <button onclick="modoEscuro()">
             Alterar
-
         </button>
 
     </div>
@@ -910,15 +753,10 @@ body {
 
     <div class="config-item">
 
-        <span>
-            👤 Perfil demonstrativo
-        </span>
+        <span>👤 Perfil demonstrativo</span>
 
-        <button
-            onclick="alert('Perfil fictício do Banco Arandu')">
-
+        <button onclick="alert('Perfil fictício do Banco Arandu')">
             Ver
-
         </button>
 
     </div>
@@ -926,15 +764,10 @@ body {
 
     <div class="config-item">
 
-        <span>
-            ℹ️ Sobre o Arandu
-        </span>
+        <span>ℹ️ Sobre o Arandu</span>
 
-        <button
-            onclick="alert('Banco Arandu — sistema demonstrativo')">
-
+        <button onclick="alert('Banco Arandu — sistema demonstrativo')">
             Ver
-
         </button>
 
     </div>
@@ -950,59 +783,47 @@ body {
 
 </section>
 
-
 </main>
 
 
-<!-- =========================
-     MENU INFERIOR
-========================= -->
+<!-- MENU -->
 
 <nav class="menu">
 
     <button
-        id="menuInicio"
         class="ativo"
         onclick="abrirTela('inicio', this)">
 
         <span>⌂</span>
-
         Início
 
     </button>
 
 
-    <button
-        onclick="abrirTela('extratoTela', this)">
+    <button onclick="abrirTela('extratoTela', this)">
 
         <span>▤</span>
-
         Extrato
 
     </button>
 
 
-    <button
-        onclick="abrirTela('cartaoTela', this)">
+    <button onclick="abrirTela('cartaoTela', this)">
 
         <span>▣</span>
-
         Cartão
 
     </button>
 
 
-    <button
-        onclick="abrirTela('ajustesTela', this)">
+    <button onclick="abrirTela('ajustesTela', this)">
 
         <span>⚙</span>
-
         Ajustes
 
     </button>
 
 </nav>
-
 
 </section>
 
@@ -1014,9 +835,7 @@ body {
 let saldo = 2500;
 
 
-/* =========================
-   ENTRAR
-========================= */
+/* ENTRAR */
 
 function entrar() {
 
@@ -1027,9 +846,7 @@ function entrar() {
 }
 
 
-/* =========================
-   SAIR
-========================= */
+/* SAIR */
 
 function sair() {
 
@@ -1040,36 +857,24 @@ function sair() {
 }
 
 
-/* =========================
-   ABRIR TELA
-========================= */
+/* ABRIR TELA */
 
 function abrirTela(id, botao) {
 
-    const telas =
-        document.querySelectorAll(".tela");
+    const telas = document.querySelectorAll(".tela");
 
     telas.forEach(function(tela) {
-
         tela.classList.remove("ativa");
-
     });
 
-
-    document
-        .getElementById(id)
-        .classList.add("ativa");
+    document.getElementById(id).classList.add("ativa");
 
 
-    const botoes =
-        document.querySelectorAll(".menu button");
+    const botoes = document.querySelectorAll(".menu button");
 
     botoes.forEach(function(btn) {
-
         btn.classList.remove("ativo");
-
     });
-
 
     if (botao) {
         botao.classList.add("ativo");
@@ -1078,107 +883,61 @@ function abrirTela(id, botao) {
 }
 
 
-/* =========================
-   ABRIR TELA SEM MENU
-========================= */
+/* ABRIR TELA SEM MENU */
 
 function abrirTelaPorId(id) {
 
-    const telas =
-        document.querySelectorAll(".tela");
+    const telas = document.querySelectorAll(".tela");
 
     telas.forEach(function(tela) {
-
         tela.classList.remove("ativa");
-
     });
 
-
-    document
-        .getElementById(id)
-        .classList.add("ativa");
+    document.getElementById(id).classList.add("ativa");
 
 
-    const botoes =
-        document.querySelectorAll(".menu button");
+    const botoes = document.querySelectorAll(".menu button");
 
     botoes.forEach(function(btn) {
-
         btn.classList.remove("ativo");
-
     });
 
 }
 
 
-/* =========================
-   SALDO
-========================= */
+/* ATUALIZAR SALDO */
 
 function atualizarSaldo() {
 
-    document
-        .getElementById("saldo")
-        .textContent =
-        saldo.toLocaleString(
-            "pt-BR",
-            {
-                style: "currency",
-                currency: "BRL"
-            }
-        );
+    document.getElementById("saldo").textContent =
+        saldo.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
 
 }
 
 
-/* =========================
-   ADICIONAR MOVIMENTO
-========================= */
+/* ADICIONAR MOVIMENTO */
 
-function adicionarMovimento(
-    nome,
-    valor,
-    entrada
-) {
+function adicionarMovimento(nome, valor, entrada) {
 
-    const extrato =
-        document.getElementById("extrato");
+    const extrato = document.getElementById("extrato");
 
+    const resumo = document.getElementById("resumoExtrato");
 
-    const resumo =
-        document.getElementById("resumoExtrato");
+    const movimento = document.createElement("div");
+
+    movimento.className = "movimento";
 
 
-    const movimento =
-        document.createElement("div");
+    const classe = entrada ? "entrada" : "saida";
 
+    const cor = entrada ? "positivo" : "negativo";
 
-    movimento.className =
-        "movimento";
+    const simbolo = entrada ? "+" : "−";
 
-
-    const classe =
-        entrada
-        ? "entrada"
-        : "saida";
-
-
-    const cor =
-        entrada
-        ? "positivo"
-        : "negativo";
-
-
-    const simbolo =
-        entrada
-        ? "+"
-        : "−";
-
-
-    const sinal =
-        entrada
-        ? "+"
-        : "-";
+    const sinal = entrada ? "+" : "-";
 
 
     movimento.innerHTML = `
@@ -1189,60 +948,41 @@ function adicionarMovimento(
 
         <div class="mov-info">
 
-            <strong>
-                ${nome}
-            </strong>
+            <strong>${nome}</strong>
 
-            <small>
-                Agora
-            </small>
+            <small>Agora</small>
 
         </div>
 
         <strong class="${cor}">
-            ${sinal} R$
-            ${valor
-                .toFixed(2)
-                .replace(".", ",")}
+            ${sinal} ${valor.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            })}
         </strong>
 
     `;
 
 
-    extrato.prepend(
-        movimento.cloneNode(true)
-    );
+    extrato.prepend(movimento.cloneNode(true));
 
-
-    resumo.prepend(
-        movimento
-    );
+    resumo.prepend(movimento);
 
 }
 
 
-/* =========================
-   DEPOSITAR
-========================= */
+/* DEPOSITAR */
 
 function depositar() {
 
-    const valor =
-        Number(
-            prompt(
-                "Digite um valor fictício para depositar:"
-            )
-        );
+    const valor = Number(
+        prompt("Digite um valor fictício para depositar:")
+    );
 
 
-    if (
-        !valor ||
-        valor <= 0
-    ) {
+    if (!valor || valor <= 0) {
 
-        alert(
-            "Digite um valor válido."
-        );
+        alert("Digite um valor válido.");
 
         return;
 
@@ -1251,59 +991,44 @@ function depositar() {
 
     saldo += valor;
 
-
     adicionarMovimento(
         "Depósito simulado",
         valor,
         true
     );
 
-
     atualizarSaldo();
 
 }
 
 
-/* =========================
-   ENVIAR DINHEIRO
-========================= */
+/* ENVIAR DINHEIRO */
 
 function enviarDinheiro() {
 
-    const nome =
-        document
-            .getElementById("nomeDestinatario")
-            .value
-            .trim();
+    const nome = document
+        .getElementById("nomeDestinatario")
+        .value
+        .trim();
 
 
-    const valor =
-        Number(
-            document
-                .getElementById("valorTransferencia")
-                .value
-        );
+    const valor = Number(
+        document.getElementById("valorTransferencia").value
+    );
 
 
     if (!nome) {
 
-        alert(
-            "Digite o nome de quem vai receber."
-        );
+        alert("Digite o nome de quem vai receber.");
 
         return;
 
     }
 
 
-    if (
-        !valor ||
-        valor <= 0
-    ) {
+    if (!valor || valor <= 0) {
 
-        alert(
-            "Digite um valor válido."
-        );
+        alert("Digite um valor válido.");
 
         return;
 
@@ -1312,9 +1037,7 @@ function enviarDinheiro() {
 
     if (valor > saldo) {
 
-        alert(
-            "Saldo insuficiente."
-        );
+        alert("Saldo insuficiente.");
 
         return;
 
@@ -1336,27 +1059,19 @@ function enviarDinheiro() {
 
     alert(
         "Você enviou " +
-        valor.toLocaleString(
-            "pt-BR",
-            {
-                style: "currency",
-                currency: "BRL"
-            }
-        ) +
+        valor.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }) +
         " para " +
         nome +
         "."
     );
 
 
-    document
-        .getElementById("nomeDestinatario")
-        .value = "";
+    document.getElementById("nomeDestinatario").value = "";
 
-
-    document
-        .getElementById("valorTransferencia")
-        .value = "";
+    document.getElementById("valorTransferencia").value = "";
 
 
     abrirTelaPorId("inicio");
@@ -1364,17 +1079,150 @@ function enviarDinheiro() {
 }
 
 
-/* =========================
-   RECEBER DINHEIRO
-========================= */
+/* RECEBER DINHEIRO */
 
 function receberDinheiro() {
 
-    const nome =
-        document
-            .getElementById("nomeRemetente")
-            .value
-            .trim();
+    const nome = document
+        .getElementById("nomeRemetente")
+        .value
+        .trim();
 
 
-  
+    const valor = Number(
+        document.getElementById("valorRecebimento").value
+    );
+
+
+    if (!nome) {
+
+        alert("Digite o nome de quem mandou o dinheiro.");
+
+        return;
+
+    }
+
+
+    if (!valor || valor <= 0) {
+
+        alert("Digite um valor válido.");
+
+        return;
+
+    }
+
+
+    saldo += valor;
+
+
+    adicionarMovimento(
+        "Recebido de " + nome,
+        valor,
+        true
+    );
+
+
+    atualizarSaldo();
+
+
+    const valorFormatado =
+        valor.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+
+
+    document.getElementById("textoRecebimento").textContent =
+        "Você recebeu " +
+        valorFormatado +
+        " de " +
+        nome +
+        ".";
+
+
+    document.getElementById("mensagemRecebimento").style.display =
+        "block";
+
+
+    document.getElementById("nomeRemetente").value = "";
+
+    document.getElementById("valorRecebimento").value = "";
+
+}
+
+
+/* PAGAR */
+
+function pagar() {
+
+    const valor = Number(
+        prompt("Digite um valor fictício para pagar:")
+    );
+
+
+    if (!valor || valor <= 0) {
+
+        alert("Digite um valor válido.");
+
+        return;
+
+    }
+
+
+    if (valor > saldo) {
+
+        alert("Saldo insuficiente.");
+
+        return;
+
+    }
+
+
+    saldo -= valor;
+
+
+    adicionarMovimento(
+        "Pagamento simulado",
+        valor,
+        false
+    );
+
+
+    atualizarSaldo();
+
+}
+
+
+/* MODO ESCURO */
+
+function modoEscuro() {
+
+    const escuro =
+        document.body.classList.toggle("escuro");
+
+
+    if (escuro) {
+
+        document.body.style.background = "#101615";
+
+        document.querySelector(".app").style.background = "#101615";
+
+    } else {
+
+        document.body.style.background = "#eef3f0";
+
+        document.querySelector(".app").style.background = "#eef3f0";
+
+    }
+
+}
+
+
+/* INICIAR SALDO */
+
+atualizarSaldo();
+
+</script>
+
+</body>
+        </html>
